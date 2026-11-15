@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0d1110" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="AuraFit AI" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23141917'/><text x='50%' y='62%' font-size='55' font-weight='bold' fill='%23e5b567' text-anchor='middle'>✦</text></svg>">
+  <title>AuraFit AI — প্রিমিয়াম ফ্যাট লস ও জিম অ্যাসিস্ট্যান্ট</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-canvas: #0c0f0e;
+      --surface-1: #141917;
+      --surface-2: #1c2220;
+      --accent-gold: #e5b567;
+      --accent-sage: #4ade80;
+      --accent-coral: #fb7185;
+      --text-primary: #f4f1ea;
+      --text-muted: #9ca39e;
+    }
+    body {
+      font-family: 'Hind Siliguri', sans-serif;
+      background-color: var(--bg-canvas);
+      background-image: 
+        radial-gradient(ellipse at 0% 0%, rgba(229, 181, 103, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(74, 222, 128, 0.06) 0%, transparent 50%);
+      color: var(--text-primary);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    input, textarea, select {
+      user-select: text !important;
+      -webkit-user-select: text !important;
+    }
+    .font-num {
+      font-family: 'Plus Jakarta Sans', 'Hind Siliguri', sans-serif;
+    }
+    .editorial-card {
+      background: linear-gradient(165deg, #171d1b 0%, #111514 100%);
+      border: 1px solid rgba(244, 241, 234, 0.07);
+      box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+    .gold-hero-card {
+      background: linear-gradient(145deg, #1d2421 0%, #131816 60%, #1a1814 100%);
+      border: 1px solid rgba(229, 181, 103, 0.28);
+      box-shadow: 0 16px 40px -15px rgba(229, 181, 103, 0.14), inset 0 1px 0 rgba(229, 181, 103, 0.15);
+    }
+    .pill-tab {
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .pill-tab-active {
+      background: #e5b567;
+      color: #0c0f0e;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(229, 181, 103, 0.3);
+    }
+    @keyframes softPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.25); }
+    }
+    .live-dot {
+      animation: softPulse 2s infinite ease-in-out;
+    }
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(0.85);
+      cursor: pointer;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="min-h-screen pb-28">
+
+  <!-- Editorial Top Header (Fixed markup & layout) -->
+  <header class="sticky top-0 z-30 bg-[#0c0f0e]/90 backdrop-blur-xl border-b border-[#f4f1ea]/10 px-4 py-3.5">
+    <div class="max-w-lg mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-[#1c2220] border border-[#e5b567]/40 flex items-center justify-center text-[#e5b567] font-bold text-lg shadow-inner">
+          ✦
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base font-bold tracking-tight text-[#f4f1ea]">AuraFit Studio</h1>
+            <span class="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-[#e5b567]/15 text-[#e5b567] border border-[#e5b567]/30">AI COACH</span>
+          </div>
+          <p class="text-[10px] text-[#9ca39e]" data-i18n="headerSubtitle">ফ্যাট লস ও জিম ট্র্যাকার</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button onclick="toggleLanguage()" id="langToggleBtn" aria-label="ভাষা পরিবর্তন" class="px-2.5 py-1.5 rounded-full text-[11px] font-bold bg-[#1c2220] text-[#f4f1ea] border border-[#f4f1ea]/15 active:scale-95 transition">
+          EN
+        </button>
+        <button onclick="openApiKeyModal()" aria-label="Gemini API সেটিংস" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-[#1c2220] text-[#e5b567] border border-[#e5b567]/30 active:scale-95 transition flex items-center gap-1">
+          <span>🔑</span>
+          <span id="apiStatusBadge">AI কী</span>
+        </button>
+        <button id="notifBtn" onclick="requestNotifPermission()" class="px-3 py-1.5 rounded-full text-xs font-bold bg-[#e5b567] text-[#0c0f0e] active:scale-95 transition flex items-center gap-1.5 shadow-md">
+          <span class="w-2 h-2 rounded-full bg-[#0c0f0e] live-dot"></span>
+          <span id="notifBtnText">অ্যালার্ম চালু</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Notification Banner -->
+  <div id="toastBanner" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-3">
+    <div class="bg-[#1c2220] border border-[#e5b567]/40 text-[#f4f1ea] px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5">
+      <span class="text-[#e5b567] text-base">✦</span>
+      <p id="toastMsg" class="text-xs font-medium leading-snug"></p>
+    </div>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <div class="max-w-lg mx-auto">
+
+    <!-- ==========================================
+         TAB 1: DAILY ROUTINE & SMART ALARMS
+    =========================================== -->
+    <main id="tab-schedule" class="px-4 pt-4 space-y-4">
+
+      <!-- Next Upcoming Alarm Hero Card -->
+      <div class="gold-hero-card rounded-3xl p-5 relative overflow-hidden">
+        <div class="flex justify-between items-start gap-3">
+          <div class="space-y-1.5">
+            <div class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#e5b567]">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#e5b567] live-dot"></span>
+              <span data-i18n="nextSchedule">পরবর্তী শিডিউল</span>
+            </div>
+            <h2 id="nextTitle" class="text-lg font-bold text-[#f4f1ea] leading-snug">লোড হচ্ছে...</h2>
+            <p id="nextDesc" class="text-xs text-[#9ca39e] leading-relaxed">...</p>
+          </div>
+          <div class="text-right shrink-0 bg-[#0c0f0e]/80 px-3.5 py-2.5 rounded-2xl border border-[#e5b567]/25">
+            <div id="nextTime" class="text-lg font-bold font-num text-[#e5b567]">--:--</div>
+            <div id="nextCountdown" class="text-[10px] text-[#9ca39e] mt-0.5 font-medium">অপেক্ষমান</div>
+          </div>
+        </div>
+        <div class="mt-4 pt-3 border-t border-[#f4f1ea]/10 flex items-center justify-between text-xs">
+          <span class="text-[#9ca39e]" id="gymSessionLabel">জিম সেশন: <strong class="text-[#f4f1ea]">সন্ধ্যা ৭:০০ – রাত ৯:০০</strong></span>
+          <button onclick="testAlarm()" id="soundTestBtn" class="px-3 py-1 rounded-full bg-[#f4f1ea]/5 hover:bg-[#f4f1ea]/10 text-[#e5b567] font-semibold border border-[#e5b567]/25 active:scale-95 transition">
+            🔔 সাউন্ড টেস্ট
+          </button>
+        </div>
+      </div>
+
+      <!-- Daily AI Health & Hair Insight Card -->
+      <div class="editorial-card rounded-3xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-sm text-emerald-400">🌿</span>
+            <div>
+              <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                <span data-i18n="todayInsight">আজকের এআই ইনসাইট</span>
+                <span id="tipSourceTag" class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 font-normal">অফলাইন</span>
+              </h3>
+              <p id="tipCategory" class="text-[10px] text-[#9ca39e]">ফ্যাট লস ও হেয়ার কেয়ার</p>
+            </div>
+          </div>
+          <button id="newTipBtn" onclick="fetchLiveGeminiTip(true)" class="text-[11px] px-3 py-1 rounded-full bg-[#1c2220] hover:bg-[#252d2a] text-[#e5b567] border border-[#e5b567]/30 font-semibold active:scale-95 transition">
+            ✦ নতুন AI টিপস
+          </button>
+        </div>
+        <p id="dailyTipText" class="text-xs text-[#f4f1ea]/90 leading-relaxed bg-[#0c0f0e]/60 p-3.5 rounded-2xl border border-[#f4f1ea]/5 mt-2">
+          লোড হচ্ছে...
+        </p>
+      </div>
+
+      <!-- Routine List Header -->
+      <div class="flex items-center justify-between pt-1">
+        <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="dailyRoutineHeader">দৈনিক রুটিন ও অ্যালার্ম</h3>
+        <button onclick="openAddModal()" id="addTimeBtn" class="text-xs bg-[#e5b567]/15 hover:bg-[#e5b567]/25 text-[#e5b567] border border-[#e5b567]/30 px-3.5 py-1.5 rounded-full font-bold active:scale-95 transition">
+          + নতুন সময়
+        </button>
+      </div>
+
+      <div id="scheduleList" class="space-y-2.5"></div>
+    </main>
+
+    <!-- ==========================================
+         TAB 2: WEIGHT TRACKER (KG & INCHES)
+    =========================================== -->
+    <main id="tab-weight" class="px-4 pt-4 space-y-4 hidden">
+
+      <!-- Weight Progress Hero Card -->
+      <div class="gold-hero-card rounded-3xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-widest text-[#e5b567]" data-i18n="weightTrackerTag">ওয়েট লস ট্র্যাকার</span>
+            <h2 class="text-lg font-bold text-[#f4f1ea] mt-0.5" data-i18n="weightProgressTitle">আপনার ওজনের পরিবর্তন</h2>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-[#9ca39e] block" data-i18n="totalLostLabel">মোট কমেছে</span>
+            <span id="weightLostBadge" class="text-base font-bold font-num text-emerald-400">০.০ কেজি</span>
+          </div>
+        </div>
+
+        <!-- Current vs Target Weight Grid -->
+        <div class="grid grid-cols-3 gap-2.5 text-center">
+          <div class="bg-[#0c0f0e]/70 p-3 rounded-2xl border border-[#f4f1ea]/5">
+            <span class="text-[10px] text-[#9ca39e] block" data-i18n="startWeightLabel">শুরুর ওজন</span>
+            <span id="startWeightDisplay" class="text-base font-bold font-num text-[#f4f1ea] mt-0.5 block">-- kg</span>
+          </div>
+          <div class="bg-[#0c0f0e]/70 p-3 rounded-2xl border border-[#e5b567]/30">
+            <span class="text-[10px] text-[#e5b567] block" data-i18n="currentWeightLabel">বর্তমান ওজন</span>
+            <span id="currentWeightDisplay" class="text-base font-bold font-num text-[#e5b567] mt-0.5 block">-- kg</span>
+          </div>
+          <div class="bg-[#0c0f0e]/70 p-3 rounded-2xl border border-emerald-500/25">
+            <span class="text-[10px] text-emerald-400 block" data-i18n="targetWeightLabel">টার্গেট ওজন</span>
+            <span id="targetWeightDisplay" class="text-base font-bold font-num text-emerald-400 mt-0.5 block">-- kg</span>
+          </div>
+        </div>
+
+        <!-- Visual Progress Bar -->
+        <div>
+          <div class="flex justify-between text-[11px] text-[#9ca39e] mb-1.5">
+            <span data-i18n="goalProgressLabel">লক্ষ্য পূরণের অগ্রগতি</span>
+            <span id="weightGoalPct" class="font-num font-bold text-[#e5b567]">0%</span>
+          </div>
+          <div class="w-full h-2.5 bg-[#0c0f0e] rounded-full overflow-hidden border border-[#f4f1ea]/10">
+            <div id="weightProgressBar" class="h-full bg-gradient-to-r from-[#e5b567] to-emerald-400 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Interactive SVG Weight Trend Chart -->
+        <div class="bg-[#0c0f0e]/80 rounded-2xl p-3 border border-[#f4f1ea]/5">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[10px] text-[#9ca39e] font-semibold" data-i18n="recentWeightGraph">সাম্প্রতিক ওজনের গ্রাফ (কেজি)</span>
+            <span class="text-[10px] text-emerald-400" data-i18n="weeklyTrend">সাপ্তাহিক ট্রেন্ড</span>
+          </div>
+          <svg id="weightChartSvg" viewBox="0 0 300 95" class="w-full h-24 overflow-visible">
+            <!-- Dynamically drawn chart -->
+          </svg>
+        </div>
+      </div>
+
+      <!-- Log Today's Weight & Target Form -->
+      <div class="editorial-card rounded-3xl p-4 space-y-3">
+        <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="updateWeightHeader">⚖️ আজকের ওজন ও টার্গেট আপডেট করুন</h3>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="text-[11px] text-[#9ca39e] block mb-1" data-i18n="todayWeightInputLabel">আজকের ওজন (কেজি)</label>
+            <input type="number" step="0.1" id="inputNewWeight" placeholder="76.5" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-[#e5b567]">
+          </div>
+          <div>
+            <label class="text-[11px] text-[#9ca39e] block mb-1" data-i18n="targetWeightInputLabel">টার্গেট ওজন (কেজি)</label>
+            <input type="number" step="0.1" id="inputTargetWeight" placeholder="68.0" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-emerald-400">
+          </div>
+        </div>
+        <button onclick="logWeightEntry()" id="saveWeightBtn" class="w-full py-2.5 rounded-xl bg-[#e5b567] text-[#0c0f0e] font-bold text-xs shadow-md active:scale-95 transition">
+          + ওজন সেভ করুন ও এআই বিশ্লেষণ দেখুন
+        </button>
+
+        <!-- AI Weight Analysis Feedback -->
+        <div id="aiWeightInsight" class="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-[#f4f1ea]/90 leading-relaxed" data-i18n="weightTipText">
+          💡 প্রতি সপ্তাহে সকালে খালি পেটে বাথরুম সেরে একই সময়ে ওজন মাপুন এবং এখানে সেভ করুন।
+        </div>
+      </div>
+
+      <!-- Weight History Log -->
+      <div class="editorial-card rounded-3xl p-4 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-[#9ca39e]" data-i18n="weightHistoryHeader">ওজনের ইতিহাস (History)</h3>
+          <button onclick="clearWeightHistory()" id="clearHistoryBtn" class="text-[11px] text-rose-400 hover:underline">হিস্ট্রি মুছুন</button>
+        </div>
+        <div id="weightHistoryList" class="space-y-2 max-h-48 overflow-y-auto no-scrollbar"></div>
+      </div>
+
+    </main>
+
+    <!-- ==========================================
+         TAB 3: AI STUDIO (BILINGUAL & ENHANCED)
+    =========================================== -->
+    <main id="tab-ai" class="px-4 pt-4 space-y-4 hidden">
+      
+      <!-- 0. Live Gemini AI Personal Chat Coach -->
+      <div class="gold-hero-card rounded-3xl p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-2xl bg-[#e5b567]/20 border border-[#e5b567]/40 flex items-center justify-center text-base text-[#e5b567]">✦</span>
+            <div>
+              <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="liveCoachTitle">লাইভ Gemini AI ফিটনেস কোচ</h3>
+              <p class="text-[11px] text-[#9ca39e]" data-i18n="liveCoachSub">যেকোনো খাবার, জিম বা চুল পড়া নিয়ে প্রশ্ন করুন</p>
+            </div>
+          </div>
+          <button onclick="openApiKeyModal()" id="apiSetupBtn" class="text-[10px] px-2.5 py-1 rounded-full bg-[#0c0f0e]/80 text-[#e5b567] border border-[#e5b567]/30 font-semibold">
+            API সেটআপ
+          </button>
+        </div>
+
+        <div id="aiChatResponse" class="p-3.5 rounded-2xl bg-[#0c0f0e]/80 border border-[#f4f1ea]/10 text-xs text-[#f4f1ea]/90 leading-relaxed max-h-56 overflow-y-auto no-scrollbar">
+          👋 হ্যালো! আমি আপনার ব্যক্তিগত <strong>Gemini AI কোচ</strong>। আপনার সন্ধ্যা ৭টা–৯টার জিম রুটিন, ফ্যাট লস বা চুলের যত্ন নিয়ে নিচে যেকোনো প্রশ্ন লিখুন!
+        </div>
+
+        <!-- Quick Question Chips -->
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-[11px]">
+          <button onclick="askPresetPrompt('dinner')" class="shrink-0 px-2.5 py-1 rounded-lg bg-[#1c2220] hover:bg-[#e5b567]/20 border border-[#f4f1ea]/10 text-[#9ca39e] hover:text-[#e5b567] transition">
+            🍽️ রাতে কী খাব?
+          </button>
+          <button onclick="askPresetPrompt('sweat')" class="shrink-0 px-2.5 py-1 rounded-lg bg-[#1c2220] hover:bg-[#e5b567]/20 border border-[#f4f1ea]/10 text-[#9ca39e] hover:text-[#e5b567] transition">
+            💧 বেশি ঘামলে করণীয়?
+          </button>
+          <button onclick="askPresetPrompt('hair')" class="shrink-0 px-2.5 py-1 rounded-lg bg-[#1c2220] hover:bg-[#e5b567]/20 border border-[#f4f1ea]/10 text-[#9ca39e] hover:text-[#e5b567] transition">
+            💇‍♂️ চুল পড়া কমাব কীভাবে?
+          </button>
+        </div>
+
+        <div class="flex gap-2">
+          <input type="text" id="aiUserPrompt" placeholder="যেমন: আজ বিরিয়ানি খেয়েছি, রাতে কী খাব?" onkeypress="if(event.key==='Enter') askLiveGemini()" class="flex-1 bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-xs focus:outline-none focus:border-[#e5b567]">
+          <button id="aiSendBtn" onclick="askLiveGemini()" class="px-4 py-2.5 rounded-xl bg-[#e5b567] text-[#0c0f0e] font-bold text-xs shrink-0 active:scale-95 transition">
+            জিজ্ঞাসা
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. AI Body & Macro Architect (Height in Feet/Inches & Weight in KG) -->
+      <div class="editorial-card rounded-3xl p-4 space-y-3.5">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-2xl bg-[#e5b567]/15 border border-[#e5b567]/30 flex items-center justify-center text-base">📐</span>
+          <div>
+            <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="bodyArchitectTitle">এআই বডি ও ক্যালরি আর্কিটেক্ট</h3>
+            <p class="text-[11px] text-[#9ca39e]" data-i18n="bodyArchitectSub">উচ্চতা (ফুট/ইঞ্চি) ও ওজন (কেজি) দিয়ে সঠিক মাপ বের করুন</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="text-[10px] text-[#9ca39e] block mb-1" data-i18n="weightKgLabel">বর্তমান ওজন (কেজি)</label>
+            <input type="number" step="0.1" id="aiWeightKg" placeholder="78" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-[#e5b567]">
+          </div>
+          <div>
+            <label class="text-[10px] text-[#9ca39e] block mb-1" data-i18n="ageYearsLabel">বয়স (বছর)</label>
+            <input type="number" id="aiAge" placeholder="26" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-[#e5b567]">
+          </div>
+        </div>
+
+        <!-- Height in Feet & Inches -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="text-[10px] text-[#9ca39e] block mb-1" data-i18n="heightFeetLabel">উচ্চতা — ফুট (Feet)</label>
+            <select id="aiHeightFeet" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-[#e5b567]">
+              <option value="4">4 ft</option>
+              <option value="5" selected>5 ft</option>
+              <option value="6">6 ft</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] text-[#9ca39e] block mb-1" data-i18n="heightInchesLabel">উচ্চতা — ইঞ্চি (Inches)</label>
+            <select id="aiHeightInches" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-[#e5b567]">
+              <option value="0">0 in</option>
+              <option value="1">1 in</option>
+              <option value="2">2 in</option>
+              <option value="3">3 in</option>
+              <option value="4">4 in</option>
+              <option value="5">5 in</option>
+              <option value="6" selected>6 in</option>
+              <option value="7">7 in</option>
+              <option value="8">8 in</option>
+              <option value="9">9 in</option>
+              <option value="10">10 in</option>
+              <option value="11">11 in</option>
+            </select>
+          </div>
+        </div>
+
+        <button onclick="calculateAIMetrics()" id="calcReportBtn" class="w-full py-2.5 rounded-xl bg-[#e5b567] text-[#0c0f0e] font-bold text-xs shadow-md active:scale-95 transition">
+          ✦ এআই রিপোর্ট তৈরি করুন
+        </button>
+
+        <div id="aiCalcResult" class="hidden p-3.5 rounded-2xl bg-[#0c0f0e]/85 border border-[#e5b567]/30 space-y-2.5 text-xs"></div>
+      </div>
+
+      <!-- 2. AI Post-Workout Dinner Generator -->
+      <div class="editorial-card rounded-3xl p-4 space-y-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-2xl bg-emerald-500/15 border border-emerald-400/25 flex items-center justify-center text-base">🍽️</span>
+          <div>
+            <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="dinnerMakerTitle">এআই পোস্ট-ওয়ার্কআউট ডিনার মেকার</h3>
+            <p class="text-[11px] text-[#9ca39e]" data-i18n="dinnerMakerSub">রাত ৯টায় জিম শেষে আজ কী খাবেন তার রেসিপি পান</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <select id="dinnerProteinPref" class="bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-2.5 py-2 text-[#f4f1ea] text-xs focus:outline-none focus:border-emerald-400">
+            <option value="chicken">মুরগির মাংস (Chicken)</option>
+            <option value="fish">মাছ (Fish)</option>
+            <option value="egg">ডিম (Eggs)</option>
+          </select>
+          <select id="dinnerMoodPref" class="bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-2.5 py-2 text-[#f4f1ea] text-xs focus:outline-none focus:border-emerald-400">
+            <option value="light">হালকা ও দ্রুত হজম (Light)</option>
+            <option value="spicy">একটু ঝাল ও মুখরোচক (Spicy)</option>
+            <option value="soup">স্যুপ ও সেদ্ধ স্টাইল (Soup)</option>
+          </select>
+        </div>
+
+        <button onclick="generateAIDinner()" id="genDinnerBtn" class="w-full py-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 font-bold text-xs active:scale-95 transition">
+          ✨ আজকের রাতের ডিনার প্ল্যান তৈরি করুন
+        </button>
+
+        <div id="aiDinnerOutput" class="hidden p-3.5 rounded-2xl bg-[#0c0f0e]/80 border border-emerald-500/25 text-xs text-[#f4f1ea]/90 leading-relaxed"></div>
+      </div>
+
+      <!-- 3. AI Gym Workout & Sweat Recovery Planner -->
+      <div class="editorial-card rounded-3xl p-4 space-y-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-2xl bg-rose-500/15 border border-rose-400/25 flex items-center justify-center text-base">🔥</span>
+          <div>
+            <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="gymPlannerTitle">এআই ফ্যাট-বার্ন জিম প্ল্যানার (৭টা - ৯টা)</h3>
+            <p class="text-[11px] text-[#9ca39e]" data-i18n="gymPlannerSub">আজ জিমে কোন অংশের ব্যায়াম করবেন সিলেক্ট করুন</p>
+          </div>
+        </div>
+
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+          <button onclick="generateAIWorkout('belly')" id="wkBellyBtn" class="shrink-0 text-[11px] px-3 py-1.5 rounded-full bg-[#1c2220] hover:bg-[#e5b567] hover:text-[#0c0f0e] border border-[#f4f1ea]/10 font-semibold transition">পেটের চর্বি (Core & HIIT)</button>
+          <button onclick="generateAIWorkout('upper')" id="wkUpperBtn" class="shrink-0 text-[11px] px-3 py-1.5 rounded-full bg-[#1c2220] hover:bg-[#e5b567] hover:text-[#0c0f0e] border border-[#f4f1ea]/10 font-semibold transition">আপার বডি (Chest/Back)</button>
+          <button onclick="generateAIWorkout('legs')" id="wkLegsBtn" class="shrink-0 text-[11px] px-3 py-1.5 rounded-full bg-[#1c2220] hover:bg-[#e5b567] hover:text-[#0c0f0e] border border-[#f4f1ea]/10 font-semibold transition">লেগস ও কার্ডিও</button>
+        </div>
+
+        <div id="aiWorkoutOutput" class="p-3.5 rounded-2xl bg-[#0c0f0e]/80 border border-[#f4f1ea]/10 text-xs text-[#f4f1ea]/90 leading-relaxed">
+          👆 ওপরের যেকোনো একটি ওয়ার্কআউট টার্গেট সিলেক্ট করলে এআই আপনার ২ ঘণ্টার জিম রুটিন ও ঘাম রিকভারি গাইড সাজিয়ে দেবে।
+        </div>
+      </div>
+
+      <!-- 4. AI Smart Food Swap -->
+      <div class="editorial-card rounded-3xl p-4 space-y-3">
+        <div class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-2xl bg-amber-500/15 border border-amber-400/25 flex items-center justify-center text-base">🔄</span>
+          <div>
+            <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="foodSwapTitle">এআই স্মার্ট ফুড রিপ্লেসার</h3>
+            <p class="text-[11px] text-[#9ca39e]" data-i18n="foodSwapSub">ঘরে নির্ধারিত খাবার না থাকলে সমমানের বিকল্প</p>
+          </div>
+        </div>
+
+        <select id="foodSwapSelect" onchange="generateFoodSwap()" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-xs focus:outline-none focus:border-[#e5b567]">
+          <option value="">কোন খাবারটি ঘরে নেই? সিলেক্ট করুন...</option>
+          <option value="chicken">রাতে মুরগির বুকের মাংস নেই</option>
+          <option value="broccoli">ব্রোকলি বা বিদেশি সবজি নেই</option>
+          <option value="oats">সকালে কলা বা ওটস নেই</option>
+          <option value="greentea">বিকেলে গ্রিন টি বা ব্ল্যাক কফি নেই</option>
+          <option value="chia">চিয়া সিড বা কাঠবাদাম নেই</option>
+        </select>
+
+        <div id="foodSwapResult" class="hidden p-3 rounded-2xl bg-[#e5b567]/10 border border-[#e5b567]/25 text-xs text-[#f4f1ea] leading-relaxed"></div>
+      </div>
+
+    </main>
+
+    <!-- ==========================================
+         TAB 4: HYDRATION, DAILY TIPS & SETUP
+    =========================================== -->
+    <main id="tab-water" class="px-4 pt-4 space-y-4 hidden">
+      
+      <!-- Water Tracker Card -->
+      <div class="editorial-card rounded-3xl p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <h3 class="text-base font-bold text-[#f4f1ea]" data-i18n="waterTrackerTitle">💧 স্মার্ট হাইড্রেশন ট্র্যাকার</h3>
+            <p class="text-xs text-[#9ca39e]" data-i18n="waterTrackerSub">ঘামের লবণ ও চুলের আর্দ্রতা ধরে রাখতে ৩.৫ লিটার</p>
+          </div>
+          <div class="text-right font-num">
+            <span id="waterTotal" class="text-xl font-bold text-sky-400">0</span>
+            <span class="text-xs text-[#9ca39e]">/ 3500 ml</span>
+          </div>
+        </div>
+
+        <div class="w-full h-3 bg-[#0c0f0e] rounded-full overflow-hidden my-3 border border-[#f4f1ea]/10">
+          <div id="waterBar" class="h-full rounded-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-300" style="width: 0%"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 mt-3">
+          <button onclick="addWater(250)" class="py-2.5 px-2 rounded-xl bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/30 text-sky-300 text-xs font-bold active:scale-95 transition">
+            + 250 ml
+          </button>
+          <button onclick="addWater(500)" class="py-2.5 px-2 rounded-xl bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/30 text-sky-300 text-xs font-bold active:scale-95 transition">
+            + 500 ml
+          </button>
+          <button onclick="resetWater()" id="resetWaterBtn" class="py-2.5 px-2 rounded-xl bg-[#1c2220] hover:bg-[#252d2a] border border-[#f4f1ea]/10 text-[#9ca39e] text-xs font-semibold active:scale-95 transition">
+            রিসেট
+          </button>
+        </div>
+      </div>
+
+      <!-- Daily Health Tips Library -->
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-[#f4f1ea]" data-i18n="tipsLibraryTitle">📚 দৈনিক হেলথ ও হেয়ার কেয়ার লাইব্রেরি</h3>
+          <span id="guidesCountBadge" class="text-[10px] text-[#e5b567] bg-[#e5b567]/10 px-2.5 py-0.5 rounded-full border border-[#e5b567]/25">১২টি গাইড</span>
+        </div>
+        <div id="allTipsList" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Quick Install / Shortcut Guide -->
+      <div class="editorial-card rounded-3xl p-4 space-y-2.5">
+        <h3 class="text-sm font-bold text-[#e5b567]" data-i18n="installTipTitle">📲 হোম স্ক্রিনে শর্টকাট আপডেট টিপস</h3>
+        <p class="text-xs text-[#9ca39e] leading-relaxed" data-i18n="installTipBody">
+          ফাইলটি ডাউনলোড করে <strong class="text-[#f4f1ea]">app.netlify.com/drop</strong>-এ আপলোড করলে বা আগের লোকাল ফাইলটি রিপ্লেস করে Chrome ক্যাশ ক্লিয়ার করলেই নতুন ডিজাইনটি স্থায়ীভাবে সেট হয়ে যাবে।
+        </p>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Tactile Pill Bottom Navigation -->
+  <nav class="fixed bottom-3 inset-x-3 max-w-lg mx-auto bg-[#141917]/95 backdrop-blur-2xl border border-[#f4f1ea]/10 rounded-full p-1.5 flex justify-between items-center z-30 shadow-2xl">
+    <button onclick="switchTab('schedule')" id="nav-schedule" class="pill-tab pill-tab-active flex-1 py-2.5 px-2 rounded-full text-xs flex items-center justify-center gap-1.5 text-[#9ca39e]">
+      <span>⏰</span>
+      <span data-i18n="navRoutine">রুটিন</span>
+    </button>
+    <button onclick="switchTab('weight')" id="nav-weight" class="pill-tab flex-1 py-2.5 px-2 rounded-full text-xs flex items-center justify-center gap-1.5 text-[#9ca39e]">
+      <span>⚖️</span>
+      <span data-i18n="navWeight">ওয়েট</span>
+    </button>
+    <button onclick="switchTab('ai')" id="nav-ai" class="pill-tab flex-1 py-2.5 px-2 rounded-full text-xs flex items-center justify-center gap-1.5 text-[#9ca39e]">
+      <span>✦</span>
+      <span data-i18n="navAi">এআই স্টুডিও</span>
+    </button>
+    <button onclick="switchTab('water')" id="nav-water" class="pill-tab flex-1 py-2.5 px-2 rounded-full text-xs flex items-center justify-center gap-1.5 text-[#9ca39e]">
+      <span>💧</span>
+      <span data-i18n="navTips">টিপস</span>
+    </button>
+  </nav>
+
+  <!-- Modal for Add / Edit Reminder -->
+  <div id="editModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="editorial-card rounded-3xl w-full max-w-sm p-5 space-y-4">
+      <h3 id="modalTitle" class="text-base font-bold text-[#f4f1ea]">সময় পরিবর্তন করুন</h3>
+      <input type="hidden" id="editId" />
+      <div>
+        <label id="lblTime" class="text-xs text-[#9ca39e] block mb-1">সময় (Time)</label>
+        <input type="time" id="editTime" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-sm font-num focus:outline-none focus:border-[#e5b567]" />
+      </div>
+      <div>
+        <label id="lblTitle" class="text-xs text-[#9ca39e] block mb-1">শিরোনাম (Title)</label>
+        <input type="text" id="editTitleInput" placeholder="যেমন: বিকেলের নাস্তা" class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-sm focus:outline-none focus:border-[#e5b567]" />
+      </div>
+      <div>
+        <label id="lblDesc" class="text-xs text-[#9ca39e] block mb-1">বিস্তারিত খাবার / কাজ</label>
+        <textarea id="editDescInput" rows="2" placeholder="খাবারের বিবরণ লিখুন..." class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-sm focus:outline-none focus:border-[#e5b567]"></textarea>
+      </div>
+      <div class="flex gap-2 pt-1">
+        <button id="deleteReminderBtn" onclick="deleteReminder()" class="hidden py-2.5 px-3 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">ডিলিট</button>
+        <button onclick="closeModal()" id="cancelReminderBtn" class="flex-1 py-2.5 rounded-xl bg-[#1c2220] text-[#9ca39e] text-xs font-bold">বাতিল</button>
+        <button onclick="saveReminder()" id="saveReminderBtn" class="flex-1 py-2.5 rounded-xl bg-[#e5b567] text-[#0c0f0e] text-xs font-bold">সেভ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- In-App Alarm Popup Banner -->
+  <div id="alarmPopup" class="fixed top-4 inset-x-4 max-w-lg mx-auto z-50 hidden">
+    <div class="bg-[#e5b567] text-[#0c0f0e] rounded-3xl p-4 shadow-2xl border-2 border-white/40 flex items-center justify-between gap-3">
+      <div>
+        <div class="text-[10px] font-extrabold uppercase tracking-wider opacity-80" id="alarmHeaderTag">⏰ AuraFit স্মার্ট অ্যালার্ম!</div>
+        <h4 id="popupTitle" class="text-base font-bold leading-snug mt-0.5">খাবারের সময় হয়েছে</h4>
+        <p id="popupDesc" class="text-xs font-semibold opacity-90 mt-0.5">...</p>
+      </div>
+      <button onclick="dismissPopup()" id="popupDismissBtn" class="px-4 py-2.5 bg-[#0c0f0e] text-[#f4f1ea] rounded-2xl text-xs font-bold shrink-0 shadow-lg">
+        ঠিক আছে
+      </button>
+    </div>
+  </div>
+
+  <!-- Gemini API Key Setup Modal -->
+  <div id="apiKeyModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="editorial-card rounded-3xl w-full max-w-sm p-5 space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="text-base font-bold text-[#e5b567]" id="apiKeyModalTitle">🔑 ফ্রি Gemini AI যুক্ত করুন</h3>
+        <button onclick="closeApiKeyModal()" class="text-[#9ca39e] hover:text-white text-sm">✕</button>
+      </div>
+      <p class="text-xs text-[#9ca39e] leading-relaxed" id="apiKeyModalDesc">
+        প্রতিদিন একদম নতুন এআই হেলথ টিপস এবং লাইভ চ্যাট কোচ চালাতে আপনার ফ্রি <strong>Google Gemini API Key</strong> দিন (এটি শুধু আপনার ব্রাউজারে সুরক্ষিত থাকবে)।
+      </p>
+      <div class="bg-[#0c0f0e]/80 p-3 rounded-2xl border border-[#f4f1ea]/10 text-[11px] text-[#f4f1ea]/80 space-y-1">
+        <p class="font-bold text-emerald-400" id="apiKeyStepTitle">কীভাবে ফ্রি কী (Key) পাবেন?</p>
+        <p>১. ব্রাউজারে <a href="https://aistudio.google.com/apikey" target="_blank" class="text-[#e5b567] underline">aistudio.google.com/apikey</a> লিংকে যান।</p>
+        <p>২. <strong>"Create API key"</strong> বাটনে ক্লিক করে কোডটি কপি করে নিচে বসান।</p>
+      </div>
+      <div>
+        <label class="text-xs text-[#9ca39e] block mb-1">আপনার Gemini API Key</label>
+        <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-[#0c0f0e] border border-[#f4f1ea]/15 rounded-xl px-3 py-2.5 text-[#f4f1ea] text-xs font-num focus:outline-none focus:border-[#e5b567]" />
+      </div>
+      <div class="flex gap-2 pt-1">
+        <button onclick="removeApiKey()" class="py-2.5 px-3 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">মুছুন</button>
+        <button onclick="closeApiKeyModal()" class="flex-1 py-2.5 rounded-xl bg-[#1c2220] text-[#9ca39e] text-xs font-bold">বাতিল</button>
+        <button onclick="saveApiKey()" class="flex-1 py-2.5 rounded-xl bg-[#e5b567] text-[#0c0f0e] text-xs font-bold">সেভ করুন</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * BILINGUAL SYSTEM (BANGLA & ENGLISH)
+     */
+    let currentLang = 'bn';
+    try {
+      currentLang = localStorage.getItem('aurafit_lang') || 'bn';
+    } catch (e) {}
+
+    const i18nStrings = {
+      bn: {
+        headerSubtitle: "ফ্যাট লস ও জিম ট্র্যাকার",
+        nextSchedule: "পরবর্তী শিডিউল",
+        gymSession: 'জিম সেশন: <strong class="text-[#f4f1ea]">সন্ধ্যা ৭:০০ – রাত ৯:০০</strong>',
+        soundTest: "🔔 সাউন্ড টেস্ট",
+        todayInsight: "আজকের এআই ইনসাইট",
+        newAiTip: "✦ নতুন AI টিপস",
+        dailyRoutineHeader: "দৈনিক রুটিন ও অ্যালার্ম",
+        addTime: "+ নতুন সময়",
+        weightTrackerTag: "ওয়েট লস ট্র্যাকার",
+        weightProgressTitle: "আপনার ওজনের পরিবর্তন",
+        totalLostLabel: "মোট কমেছে",
+        startWeightLabel: "শুরুর ওজন",
+        currentWeightLabel: "বর্তমান ওজন",
+        targetWeightLabel: "টার্গেট ওজন",
+        goalProgressLabel: "লক্ষ্য পূরণের অগ্রগতি",
+        recentWeightGraph: "সাম্প্রতিক ওজনের গ্রাফ (কেজি)",
+        weeklyTrend: "সাপ্তাহিক ট্রেন্ড",
+        updateWeightHeader: "⚖️ আজকের ওজন ও টার্গেট আপডেট করুন",
+        todayWeightInputLabel: "আজকের ওজন (কেজি)",
+        targetWeightInputLabel: "টার্গেট ওজন (কেজি)",
+        saveWeightBtn: "+ ওজন সেভ করুন ও এআই বিশ্লেষণ দেখুন",
+        weightTipText: "💡 প্রতি সপ্তাহে সকালে খালি পেটে বাথরুম সেরে একই সময়ে ওজন মাপুন এবং এখানে সেভ করুন।",
+        weightHistoryHeader: "ওজনের ইতিহাস (History)",
+        clearHistory: "হিস্ট্রি মুছুন",
+        liveCoachTitle: "লাইভ Gemini AI ফিটনেস কোচ",
+        liveCoachSub: "যেকোনো খাবার, জিম বা চুল পড়া নিয়ে প্রশ্ন করুন",
+        apiSetup: "API সেটআপ",
+        askBtn: "জিজ্ঞাসা",
+        askPlaceholder: "যেমন: আজ বিরিয়ানি খেয়েছি, রাতে কী খাব?",
+        bodyArchitectTitle: "এআই বডি ও ক্যালরি আর্কিটেক্ট",
+        bodyArchitectSub: "উচ্চতা (ফুট/ইঞ্চি) ও ওজন (কেজি) দিয়ে সঠিক মাপ বের করুন",
+        weightKgLabel: "বর্তমান ওজন (কেজি)",
+        ageYearsLabel: "বয়স (বছর)",
+        heightFeetLabel: "উচ্চতা — ফুট (Feet)",
+        heightInchesLabel: "উচ্চতা — ইঞ্চি (Inches)",
+        calcReportBtn: "✦ এআই রিপোর্ট তৈরি করুন",
+        dinnerMakerTitle: "এআই পোস্ট-ওয়ার্কআউট ডিনার মেকার",
+        dinnerMakerSub: "রাত ৯টায় জিম শেষে আজ কী খাবেন তার রেসিপি পান",
+        genDinnerBtn: "✨ আজকের রাতের ডিনার প্ল্যান তৈরি করুন",
+        gymPlannerTitle: "এআই ফ্যাট-বার্ন জিম প্ল্যানার (৭টা - ৯টা)",
+        gymPlannerSub: "আজ জিমে কোন অংশের ব্যায়াম করবেন সিলেক্ট করুন",
+        foodSwapTitle: "এআই স্মার্ট ফুড রিপ্লেসার",
+        foodSwapSub: "ঘরে নির্ধারিত খাবার না থাকলে সমমানের বিকল্প",
+        waterTrackerTitle: "💧 স্মার্ট হাইড্রেশন ট্র্যাকার",
+        waterTrackerSub: "ঘামের লবণ ও চুলের আর্দ্রতা ধরে রাখতে ৩.৫ লিটার",
+        resetBtn: "রিসেট",
+        tipsLibraryTitle: "📚 দৈনিক হেলথ ও হেয়ার কেয়ার লাইব্রেরি",
+        guidesCount: "১২টি গাইড",
+        installTipTitle: "📲 হোম স্ক্রিনে শর্টকাট আপডেট টিপস",
+        installTipBody: 'ফাইলটি ডাউনলোড করে <strong class="text-[#f4f1ea]">app.netlify.com/drop</strong>-এ আপলোড করলে বা আগের লোকাল ফাইলটি রিপ্লেস করে Chrome ক্যাশ ক্লিয়ার করলেই নতুন ডিজাইনটি স্থায়ীভাবে সেট হয়ে যাবে।',
+        navRoutine: "রুটিন",
+        navWeight: "ওয়েট",
+        navAi: "এআই স্টুডিও",
+        navTips: "টিপস",
+        editText: "এডিট",
+        alarmOnBtn: "অ্যালার্ম চালু",
+        alarmOnActive: "অ্যালার্ম অন ✓",
+        offlineTag: "অফলাইন",
+        chatGreeting: "👋 হ্যালো! আমি আপনার ব্যক্তিগত <strong>Gemini AI কোচ</strong>। আপনার সন্ধ্যা ৭টা–৯টার জিম রুটিন, ফ্যাট লস বা চুলের যত্ন নিয়ে নিচে যেকোনো প্রশ্ন লিখুন!",
+        workoutDefault: "👆 ওপরের যেকোনো একটি ওয়ার্কআউট টার্গেট সিলেক্ট করলে এআই আপনার ২ ঘণ্টার জিম রুটিন ও ঘাম রিকভারি গাইড সাজিয়ে দেবে।"
+      },
+      en: {
+        headerSubtitle: "Fat Loss & Gym Tracker",
+        nextSchedule: "NEXT SCHEDULE",
+        gymSession: 'Gym Session: <strong class="text-[#f4f1ea]">7:00 PM – 9:00 PM</strong>',
+        soundTest: "🔔 Sound Test",
+        todayInsight: "TODAY'S AI INSIGHT",
+        newAiTip: "✦ New AI Tip",
+        dailyRoutineHeader: "Daily Routine & Alarms",
+        addTime: "+ Add Time",
+        weightTrackerTag: "WEIGHT LOSS TRACKER",
+        weightProgressTitle: "Your Weight Progress",
+        totalLostLabel: "Total Lost",
+        startWeightLabel: "Start Weight",
+        currentWeightLabel: "Current",
+        targetWeightLabel: "Target",
+        goalProgressLabel: "Goal Completion",
+        recentWeightGraph: "Recent Weight Trend (kg)",
+        weeklyTrend: "Weekly Trend",
+        updateWeightHeader: "⚖️ Log Today's Weight & Target",
+        todayWeightInputLabel: "Today's Weight (kg)",
+        targetWeightInputLabel: "Target Weight (kg)",
+        saveWeightBtn: "+ Save Weight & View AI Analysis",
+        weightTipText: "💡 Weigh yourself once a week in the morning on an empty stomach at the same time and save it here.",
+        weightHistoryHeader: "Weight History",
+        clearHistory: "Clear History",
+        liveCoachTitle: "Live Gemini AI Fitness Coach",
+        liveCoachSub: "Ask anything about diet, workouts, or hair care",
+        apiSetup: "API Setup",
+        askBtn: "Ask AI",
+        askPlaceholder: "e.g., I ate biryani today, what should I eat tonight?",
+        bodyArchitectTitle: "AI Body & Calorie Architect",
+        bodyArchitectSub: "Calculate macros using height (ft/in) & weight (kg)",
+        weightKgLabel: "Current Weight (kg)",
+        ageYearsLabel: "Age (years)",
+        heightFeetLabel: "Height — Feet",
+        heightInchesLabel: "Height — Inches",
+        calcReportBtn: "✦ Generate AI Report",
+        dinnerMakerTitle: "AI Post-Workout Dinner Maker",
+        dinnerMakerSub: "Get healthy dinner recipes after your 9 PM gym session",
+        genDinnerBtn: "✨ Generate Tonight's Dinner Plan",
+        gymPlannerTitle: "AI Fat-Burn Gym Planner (7 - 9 PM)",
+        gymPlannerSub: "Select today's workout focus area",
+        foodSwapTitle: "AI Smart Food Replacer",
+        foodSwapSub: "Healthy local alternatives if an item isn't at home",
+        waterTrackerTitle: "💧 Smart Hydration Tracker",
+        waterTrackerSub: "3.5 Liters daily to replace sweat & protect hair",
+        resetBtn: "Reset",
+        tipsLibraryTitle: "📚 Daily Health & Hair Care Library",
+        guidesCount: "12 Guides",
+        installTipTitle: "📲 Home Screen Shortcut Update Tip",
+        installTipBody: 'Upload this file to <strong class="text-[#f4f1ea]">app.netlify.com/drop</strong> or replace your local file and clear Chrome cache to keep this updated design permanently.',
+        navRoutine: "Routine",
+        navWeight: "Weight",
+        navAi: "AI Studio",
+        navTips: "Tips",
+        editText: "Edit",
+        alarmOnBtn: "Enable Alarm",
+        alarmOnActive: "Alarm On ✓",
+        offlineTag: "Offline",
+        chatGreeting: "👋 Hello! I am your personal <strong>Gemini AI Coach</strong>. Ask me anything below about your 7–9 PM gym routine, fat loss, or hair care!",
+        workoutDefault: "👆 Select a workout target above and AI will organize your 2-hour gym routine & sweat recovery guide."
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'bn' ? 'en' : 'bn';
+      try {
+        localStorage.setItem('aurafit_lang', currentLang);
+      } catch (e) {}
+      applyLanguage();
+      showToast(currentLang === 'en' ? "Switched to English!" : "বাংলা ভাষা চালু হয়েছে!");
+    }
+
+    function applyLanguage() {
+      const t = i18nStrings[currentLang];
+      document.documentElement.lang = currentLang;
+      document.getElementById('langToggleBtn').textContent = currentLang === 'bn' ? 'EN' : 'বাংলা';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) el.innerHTML = t[key];
+      });
+
+      document.getElementById('gymSessionLabel').innerHTML = t.gymSession;
+      document.getElementById('soundTestBtn').textContent = t.soundTest;
+      document.getElementById('newTipBtn').textContent = t.newAiTip;
+      document.getElementById('addTimeBtn').textContent = t.addTime;
+      document.getElementById('saveWeightBtn').textContent = t.saveWeightBtn;
+      document.getElementById('clearHistoryBtn').textContent = t.clearHistory;
+      document.getElementById('apiSetupBtn').textContent = t.apiSetup;
+      document.getElementById('aiSendBtn').textContent = t.askBtn;
+      document.getElementById('aiUserPrompt').placeholder = t.askPlaceholder;
+      document.getElementById('calcReportBtn').textContent = t.calcReportBtn;
+      document.getElementById('genDinnerBtn').textContent = t.genDinnerBtn;
+      document.getElementById('resetWaterBtn').textContent = t.resetBtn;
+      document.getElementById('guidesCountBadge').textContent = t.guidesCount;
+      document.getElementById('aiChatResponse').innerHTML = t.chatGreeting;
+      document.getElementById('aiWorkoutOutput').innerHTML = t.workoutDefault;
+
+      // Update Dropdown Options
+      const swapSel = document.getElementById('foodSwapSelect');
+      if (currentLang === 'en') {
+        swapSel.innerHTML = `
+          <option value="">Which ingredient is missing? Select...</option>
+          <option value="chicken">No chicken breast at night</option>
+          <option value="broccoli">No broccoli or exotic veggies</option>
+          <option value="oats">No banana or oats in the morning</option>
+          <option value="greentea">No green tea or black coffee</option>
+          <option value="chia">No chia seeds or almonds</option>
+        `;
+      } else {
+        swapSel.innerHTML = `
+          <option value="">কোন খাবারটি ঘরে নেই? সিলেক্ট করুন...</option>
+          <option value="chicken">রাতে মুরগির বুকের মাংস নেই</option>
+          <option value="broccoli">ব্রোকলি বা বিদেশি সবজি নেই</option>
+          <option value="oats">সকালে কলা বা ওটস নেই</option>
+          <option value="greentea">বিকেলে গ্রিন টি বা ব্ল্যাক কফি নেই</option>
+          <option value="chia">চিয়া সিড বা কাঠবাদাম নেই</option>
+        `;
+      }
+
+      updateNotifStatus();
+      renderDailyTip();
+      renderAllTips();
+      renderSchedule();
+      renderWeightUI();
+    }
+
+    /**
+     * HEALTH TIPS DATABASE (BILINGUAL)
+     */
+    const healthTipsDB = [
+      {
+        cat_bn: "🔥 ফ্যাট লস সিক্রেট",
+        text_bn: "রাতে জিমের পর ভাত বা রুটি না খেয়ে শুধু প্রোটিন ও সবজি খেলে ঘুমের মধ্যে শরীরের জমে থাকা চর্বি (Stored Fat) দ্রুত বার্ন হয়।",
+        cat_en: "🔥 Fat Loss Secret",
+        text_en: "Skipping rice or roti after your night gym session and eating only lean protein & veggies accelerates stored fat burn while you sleep."
+      },
+      {
+        cat_bn: "💇‍♂️ চুল পড়া রোধ",
+        text_bn: "সকালে ২টি সেদ্ধ ডিমের মধ্যে অন্তত ১টি কুসুমসহ খাবেন। ডিমের কুসুমে থাকা বায়োটিন চুলের গোড়া শক্ত করে এবং নতুন চুল গজাতে সাহায্য করে।",
+        cat_en: "💇‍♂️ Hair Fall Prevention",
+        text_en: "Eat at least 1 whole egg with yolk out of your 2 boiled eggs in the morning. Egg yolk is rich in biotin which strengthens hair roots."
+      },
+      {
+        cat_bn: "🍋 ইলেক্ট্রোলাইট ব্যালেন্স",
+        text_bn: "প্রতিদিন প্যাকেটজাত ওরস্যালাইন খাবেন না—এতে চিনি থাকে। জিমের ১ লিটার পানিতে ১ চিমটি লবণ ও অর্ধেক লেবুর রসই সেরা প্রাকৃতিক স্যালাইন।",
+        cat_en: "🍋 Electrolyte Balance",
+        text_en: "Avoid sugary packaged ORS daily. Mix 1 pinch of salt and half a lemon in 1L water for the best zero-sugar gym electrolyte drink."
+      },
+      {
+        cat_bn: "🍵 গ্রিন টি টাইমিং",
+        text_bn: "রাতের খাবারের পর গ্রিন টি খাবেন না। এতে থাকা ট্যানিন খাবারের আয়রন ও প্রোটিন শোষণে বাধা দেয় এবং ঘুমের ক্ষতি করে। বিকেল ৫:৩০-এ খান।",
+        cat_en: "🍵 Green Tea Timing",
+        text_en: "Avoid green tea after dinner as tannins block iron/protein absorption and disturb sleep. Drink it around 5:30 PM instead."
+      },
+      {
+        cat_bn: "🥬 আয়রন শোষণ টিপস",
+        text_bn: "পালং বা লাল শাক খাওয়ার সময় ওপরে সামান্য কাগজি লেবুর রস চিপে নেবেন। ভিটামিন সি ছাড়া শরীর শাকের আয়রন পুরোপুরি শোষণ করতে পারে না।",
+        cat_en: "🥬 Iron Absorption Tip",
+        text_en: "Squeeze fresh lemon juice over spinach or red amaranth. Vitamin C is essential for your body to absorb plant-based iron."
+      },
+      {
+        cat_bn: "😴 ডিপ স্লিপ ও রিকভারি",
+        text_bn: "জিমের পর পেশি গঠন এবং ফ্যাট বার্নের ৭০% কাজ হয় গভীর ঘুমের সময়। রাত ১১:৩০-এর মধ্যে ঘুমিয়ে পড়ার চেষ্টা করুন।",
+        cat_en: "😴 Deep Sleep Recovery",
+        text_en: "70% of muscle recovery and fat oxidation happens during deep sleep. Aim to be asleep by 11:30 PM."
+      },
+      {
+        cat_bn: "🌰 জিংক ও চুলের স্বাস্থ্য",
+        text_bn: "বিকেলে ১ চা চামচ ভাজা মিষ্টি কুমড়োর বীজ (Pumpkin seeds) খান। এতে প্রচুর জিংক থাকে যা ডায়েট চলাকালীন চুল পড়া বন্ধ রাখে।",
+        cat_en: "🌰 Zinc & Hair Health",
+        text_en: "Eat 1 tsp roasted pumpkin seeds in the afternoon. They are packed with zinc to prevent hair thinning during weight loss."
+      },
+      {
+        cat_bn: "🥗 সালাদ ম্যাজিক",
+        text_bn: "দুপুরের ভাত খাওয়ার ১০ মিনিট আগে ১ প্লেট শসা ও গাজরের সালাদ খেয়ে নিন। এতে ফাইবার পেট ভরিয়ে রাখবে এবং রক্তে সুগার হঠাৎ বাড়বে না।",
+        cat_en: "🥗 Salad Before Carbs",
+        text_en: "Eat a plate of cucumber & carrot salad 10 minutes before lunch. Fiber slows down glucose spikes and keeps you full longer."
+      },
+      {
+        cat_bn: "💧 পানি পানের নিয়ম",
+        text_bn: "জিম করার সময় একবারে ঢকঢক করে অনেক পানি না খেয়ে প্রতি ১০-১৫ মিনিট পরপর ২-৩ চুমুক করে লবণ-লেবুর পানি পান করুন।",
+        cat_en: "💧 Smart Sipping Rule",
+        text_en: "During workouts, take 2-3 small sips of lemon-salt water every 10-15 minutes instead of gulping large amounts at once."
+      },
+      {
+        cat_bn: "🍳 তেলের সঠিক মাপ",
+        text_bn: "ফ্যাট লস ডায়েটে সারাদিনে সর্বোচ্চ ২-৩ চা চামচ সরিষার তেল বা অলিভ অয়েল ব্যবহার করুন। ডুবো তেলে ভাজা খাবার একদমই এড়িয়ে চলুন।",
+        cat_en: "🍳 Cooking Oil Limit",
+        text_en: "Limit cooking oil to 2-3 teaspoons per day (mustard or olive oil) and strictly avoid deep-fried snacks."
+      },
+      {
+        cat_bn: "🍏 প্রি-ওয়ার্কআউট এনার্জি",
+        text_bn: "সন্ধ্যা ৭টার জিমের ১ ঘণ্টা আগে ১টি আপেল বা এক মুঠো ভাজা ছোলা খেলে ওয়ার্কআউটের সময় মাথা ঘোরানো বা দুর্বলতা লাগবে না।",
+        cat_en: "🍏 Pre-Workout Energy",
+        text_en: "Eat 1 apple or a handful of roasted chickpeas 1 hour before your 7 PM workout to prevent dizziness and sustain stamina."
+      },
+      {
+        cat_bn: "🍒 আমলকীর জাদু",
+        text_bn: "দুপুরের খাবারের পর প্রতিদিন ১টি কাঁচা আমলকী খান। এটি কোলাজেন তৈরি করে ত্বক টানটান রাখে এবং চুল পড়া কমায়।",
+        cat_en: "🍒 Amla Superfood",
+        text_en: "Eat 1 fresh Indian gooseberry (Amla) after lunch daily to boost collagen, keep skin firm, and stop hair fall."
+      }
+    ];
+
+    let currentTipIndex = new Date().getDate() % healthTipsDB.length;
+
+    function showToast(msg) {
+      const banner = document.getElementById('toastBanner');
+      document.getElementById('toastMsg').textContent = msg;
+      banner.classList.remove('opacity-0', '-translate-y-3');
+      banner.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        banner.classList.remove('opacity-100', 'translate-y-0');
+        banner.classList.add('opacity-0', '-translate-y-3');
+      }, 3000);
+    }
+
+    function renderDailyTip() {
+      const tip = healthTipsDB[currentTipIndex];
+      document.getElementById('tipCategory').textContent = currentLang === 'en' ? tip.cat_en : tip.cat_bn;
+      document.getElementById('dailyTipText').textContent = currentLang === 'en' ? tip.text_en : tip.text_bn;
+      document.getElementById('tipSourceTag').textContent = i18nStrings[currentLang].offlineTag;
+    }
+
+    function nextDailyTip() {
+      currentTipIndex = (currentTipIndex + 1) % healthTipsDB.length;
+      renderDailyTip();
+      showToast(currentLang === 'en' ? "New AI health insight loaded!" : "নতুন এআই হেলথ ইনসাইট লোড হয়েছে!");
+    }
+
+    /**
+     * GEMINI API KEY CONFIGURATION
+     * আপনি চাইলে নিচে কোটেশনের ভেতর আপনার API Key সরাসরি বসাতে পারেন:
+     * উদাহরণ: const DEFAULT_GEMINI_API_KEY = "AIzaSy...";
+     */
+    const DEFAULT_GEMINI_API_KEY = "";
+
+    function getSavedApiKey() {
+      try {
+        return localStorage.getItem('aurafit_gemini_key') || DEFAULT_GEMINI_API_KEY || '';
+      } catch (e) {
+        return DEFAULT_GEMINI_API_KEY || '';
+      }
+    }
+
+    function updateApiBadgeUI() {
+      const key = getSavedApiKey();
+      const badge = document.getElementById('apiStatusBadge');
+      if (key) {
+        badge.textContent = currentLang === 'en' ? 'AI Live ✓' : 'AI লাইভ ✓';
+      } else {
+        badge.textContent = currentLang === 'en' ? 'AI Key' : 'AI কী';
+      }
+    }
+
+    function openApiKeyModal() {
+      document.getElementById('geminiApiKeyInput').value = getSavedApiKey();
+      document.getElementById('apiKeyModal').classList.remove('hidden');
+    }
+
+    function closeApiKeyModal() {
+      document.getElementById('apiKeyModal').classList.add('hidden');
+    }
+
+    function saveApiKey() {
+      const val = document.getElementById('geminiApiKeyInput').value.trim();
+      if (!val) {
+        showToast(currentLang === 'en' ? "Please paste a valid Gemini API Key." : "দয়া করে একটি সঠিক API Key পেস্ট করুন।");
+        return;
+      }
+      try {
+        localStorage.setItem('aurafit_gemini_key', val);
+      } catch (e) {}
+      updateApiBadgeUI();
+      closeApiKeyModal();
+      showToast(currentLang === 'en' ? "Gemini AI connected successfully!" : "Gemini AI সফলভাবে যুক্ত হয়েছে! নতুন টিপস তৈরি হচ্ছে...");
+      fetchLiveGeminiTip(true);
+    }
+
+    function removeApiKey() {
+      try {
+        localStorage.removeItem('aurafit_gemini_key');
+        localStorage.removeItem('aurafit_cached_ai_tip');
+      } catch (e) {}
+      document.getElementById('geminiApiKeyInput').value = '';
+      updateApiBadgeUI();
+      closeApiKeyModal();
+      renderDailyTip();
+      showToast(currentLang === 'en' ? "API Key removed." : "API Key মুছে ফেলা হয়েছে।");
+    }
+
+    let workingGeminiModel = null;
+
+    async function detectWorkingModel(apiKey) {
+      if (workingGeminiModel) return workingGeminiModel;
+
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.models)) {
+            const supported = data.models
+              .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes('generateContent'))
+              .map(m => m.name.replace(/^models\//, ''));
+
+            const priority = [
+              'gemini-3.8-flash',
+              'gemini-3.5-flash',
+              'gemini-3.5-flash-lite',
+              'gemini-2.5-flash',
+              'gemini-2.5-flash-lite',
+              'gemini-2.0-flash',
+              'gemini-2.0-flash-exp'
+            ];
+
+            for (const p of priority) {
+              if (supported.includes(p)) {
+                workingGeminiModel = p;
+                return p;
+              }
+            }
+
+            if (supported.length > 0) {
+              workingGeminiModel = supported[0];
+              return workingGeminiModel;
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Model auto-detection fallback:", err);
+      }
+      return 'gemini-3.8-flash';
+    }
+
+    async function callGeminiAPI(promptText) {
+      const apiKey = getSavedApiKey();
+      if (!apiKey) return null;
+
+      const detected = await detectWorkingModel(apiKey);
+      const candidateModels = [
+        detected,
+        'gemini-3.8-flash',
+        'gemini-3.5-flash',
+        'gemini-3.5-flash-lite',
+        'gemini-2.5-flash',
+        'gemini-2.5-flash-lite',
+        'gemini-2.0-flash'
+      ].filter((m, i, arr) => m && arr.indexOf(m) === i);
+
+      let lastError = '';
+
+      for (const model of candidateModels) {
+        try {
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ role: 'user', parts: [{ text: promptText }] }]
+            })
+          });
+
+          const data = await response.json();
+          if (response.ok && data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+            workingGeminiModel = model; // Cache working model
+            return data.candidates[0].content.parts[0].text;
+          } else {
+            lastError = data?.error?.message || `HTTP ${response.status}`;
+          }
+        } catch (err) {
+          lastError = err.message || 'Network Blocked';
+        }
+      }
+      throw new Error(lastError);
+    }
+
+    async function fetchLiveGeminiTip(forceRefresh = false) {
+      const apiKey = getSavedApiKey();
+      if (!apiKey) {
+        nextDailyTip();
+        return;
+      }
+
+      const todayStr = new Date().toDateString() + '_' + currentLang;
+      try {
+        const cached = JSON.parse(localStorage.getItem('aurafit_cached_ai_tip') || 'null');
+        if (!forceRefresh && cached && cached.date === todayStr && cached.text) {
+          document.getElementById('tipCategory').textContent = currentLang === 'en' ? "✨ Today's Live Gemini AI Insight" : '✨ আজকের লাইভ Gemini AI পরামর্শ';
+          document.getElementById('dailyTipText').textContent = cached.text;
+          document.getElementById('tipSourceTag').textContent = 'Live AI';
+          return;
+        }
+      } catch (e) {}
+
+      const btn = document.getElementById('newTipBtn');
+      const tipBox = document.getElementById('dailyTipText');
+      btn.textContent = currentLang === 'en' ? 'Loading...' : 'লোড হচ্ছে...';
+      btn.disabled = true;
+      tipBox.textContent = currentLang === 'en'
+        ? '✦ Gemini AI is generating a fresh fat-loss & hair-care tip for you...'
+        : '✦ Gemini AI আপনার জন্য আজকের একদম নতুন ফ্যাট লস ও হেয়ার কেয়ার টিপস লিখছে...';
+
+      try {
+        const prompt = currentLang === 'en'
+          ? "You are an expert fitness and nutrition coach. The user works out from 7 PM to 9 PM, wants to lose fat, sweats heavily, and wants to prevent hair fall. Write 1 unique, actionable health or diet tip in 2-3 short sentences in English. No title or intro."
+          : "তুমি একজন অভিজ্ঞ বাংলাদেশি ফিটনেস ও নিউট্রিশন কোচ। ইউজার সন্ধ্যা ৭টা থেকে রাত ৯টা পর্যন্ত জিম করে, ফ্যাট কমাতে চায়, প্রচুর ঘামায় এবং চুল পড়া রোধ করতে চায়। তার জন্য আজকের একদম নতুন, ইউনিক এবং কার্যকরী ১টি হেলথ বা ডায়েট টিপস বাংলায় ২-৩ লাইনের মধ্যে লেখো। কোনো শিরোনাম বা ভূমিকা ছাড়া সরাসরি টিপসটি লিখবে।";
+        const aiText = await callGeminiAPI(prompt);
+        if (aiText) {
+          const cleanText = aiText.replace(/\*\*/g, '').trim();
+          document.getElementById('tipCategory').textContent = currentLang === 'en' ? "✨ Today's Live Gemini AI Insight" : '✨ আজকের লাইভ Gemini AI পরামর্শ';
+          tipBox.textContent = cleanText;
+          document.getElementById('tipSourceTag').textContent = 'Live AI';
+          localStorage.setItem('aurafit_cached_ai_tip', JSON.stringify({ date: todayStr, text: cleanText }));
+        }
+      } catch (err) {
+        renderDailyTip();
+        showToast(currentLang === 'en' ? "Showing offline backup tip." : "অফলাইন ব্যাকআপ টিপস দেখানো হচ্ছে।");
+      } finally {
+        btn.textContent = i18nStrings[currentLang].newAiTip;
+        btn.disabled = false;
+      }
+    }
+
+    function askPresetPrompt(type) {
+      const inputEl = document.getElementById('aiUserPrompt');
+      if (type === 'dinner') {
+        inputEl.value = currentLang === 'en' ? "What should I eat for dinner after my 9 PM workout?" : "রাত ৯টায় জিম শেষে আজ কী খাব?";
+      } else if (type === 'sweat') {
+        inputEl.value = currentLang === 'en' ? "I sweat excessively during gym. What should I drink to prevent weakness?" : "জিমে খুব ঘাম হয়, দুর্বলতা এড়াতে কী খাব?";
+      } else if (type === 'hair') {
+        inputEl.value = currentLang === 'en' ? "How to prevent hair thinning and hair fall while on a calorie deficit diet?" : "ফ্যাট লস ডায়েটে চুল পড়া রোধ করার উপায় কী?";
+      }
+      askLiveGemini();
+    }
+
+    async function askLiveGemini() {
+      const inputEl = document.getElementById('aiUserPrompt');
+      const chatBox = document.getElementById('aiChatResponse');
+      const sendBtn = document.getElementById('aiSendBtn');
+      const question = inputEl.value.trim();
+
+      if (!question) {
+        showToast(currentLang === 'en' ? "Please enter your question first." : "প্রথমে আপনার প্রশ্নটি লিখুন।");
+        return;
+      }
+
+      const apiKey = getSavedApiKey();
+      if (!apiKey) {
+        openApiKeyModal();
+        showToast(currentLang === 'en' ? "Add your free Gemini API Key first." : "লাইভ চ্যাট চালাতে আগে ফ্রি Gemini API Key দিন।");
+        return;
+      }
+
+      sendBtn.disabled = true;
+      sendBtn.textContent = '...';
+      chatBox.innerHTML = `<span class="text-[#e5b567]">${currentLang === 'en' ? '✦ Gemini AI is thinking...' : '✦ Gemini AI আপনার প্রশ্নের উত্তর তৈরি করছে...'}</span>`;
+
+      try {
+        const systemPrompt = currentLang === 'en'
+          ? `You are the personal fitness & nutrition coach of AuraFit Studio. The user works out 7 PM - 9 PM, wants fat loss, sweats heavily, and wants to prevent hair fall. Answer clearly and concisely in 4-5 bullet points or short lines in English:\n\nQuestion: ${question}`
+          : `তুমি AuraFit Studio-এর ব্যক্তিগত ফিটনেস ও নিউট্রিশন কোচ। ইউজার সন্ধ্যা ৭টা থেকে রাত ৯টা পর্যন্ত জিম করে, তার লক্ষ্য ফ্যাট কমানো, প্রচুর ঘাম হয় এবং সে চুল পড়া রোধ করতে চায়। নিচের প্রশ্নের উত্তর সহজ বাংলায়, সংক্ষেপে (৪-৫ লাইনের মধ্যে) এবং পয়েন্ট আকারে দাও:\n\nপ্রশ্ন: ${question}`;
+        
+        const reply = await callGeminiAPI(systemPrompt);
+        const formattedReply = reply
+          .replace(/\*\*(.*?)\*\*/g, '<strong class="text-[#e5b567]">$1</strong>')
+          .replace(/\n/g, '<br>');
+        chatBox.innerHTML = formattedReply;
+        inputEl.value = '';
+      } catch (err) {
+        const msg = err.message || '';
+        if (msg.includes('API_KEY_INVALID') || msg.includes('API key not valid') || msg.includes('400')) {
+          chatBox.innerHTML = currentLang === 'en'
+            ? `<span class="text-rose-400">⚠️ <strong>Invalid API Key:</strong> The key entered is invalid. Please copy a fresh key from <a href="https://aistudio.google.com/apikey" target="_blank" class="underline text-[#e5b567]">Google AI Studio</a>.</span>`
+            : `<span class="text-rose-400">⚠️ <strong>ভুল API Key:</strong> আপনার দেওয়া API কী-টি সঠিক নয়। দয়া করে <a href="https://aistudio.google.com/apikey" target="_blank" class="underline text-[#e5b567]">aistudio.google.com/apikey</a> থেকে নতুন একটি ফ্রি কী কপি করে বসান।</span>`;
+        } else if (msg.includes('RESOURCE_EXHAUSTED') || msg.includes('429')) {
+          chatBox.innerHTML = currentLang === 'en'
+            ? `<span class="text-amber-300">⚠️ <strong>Rate Limit:</strong> Free quota temporarily reached. Please wait 1 minute and ask again.</span>`
+            : `<span class="text-amber-300">⚠️ <strong>কোটা শেষ:</strong> ফ্রি রিকোয়েস্টের সীমা সাময়িক শেষ হয়েছে। ১ মিনিট পর পুনরায় প্রশ্ন করুন।</span>`;
+        } else if (msg.includes('has not been used in project') || msg.includes('disabled')) {
+          chatBox.innerHTML = currentLang === 'en' 
+            ? `<span class="text-amber-300">⚠️ <strong>API Not Enabled:</strong> Enable <strong>Generative Language API</strong> in Google Cloud or create a key in a new project on AI Studio.</span>`
+            : `<span class="text-amber-300">⚠️ <strong>API সক্রিয় করা নেই:</strong> আপনার Google Cloud প্রজেক্টে <strong>Generative Language API</strong> চালু করুন অথবা AI Studio থেকে নতুন প্রজেক্টে কি তৈরি করুন।</span>`;
+        } else {
+          chatBox.innerHTML = `<span class="text-rose-400">⚠️ Error: ${msg}</span>`;
+        }
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = i18nStrings[currentLang].askBtn;
+      }
+    }
+
+    function triggerNotification(title, desc) {
+      playBeep();
+      if ('vibrate' in navigator) {
+        navigator.vibrate([300, 150, 300, 150, 400]);
+      }
+
+      document.getElementById('popupTitle').textContent = title;
+      document.getElementById('popupDesc').textContent = desc;
+      document.getElementById('alarmPopup').classList.remove('hidden');
+
+      if ("Notification" in window && Notification.permission === "granted") {
+        try {
+          new Notification(title, {
+            body: desc,
+            tag: 'aurafit-alarm',
+            renotify: true
+          });
+        } catch (e) {}
+      }
+    }
+
+    function checkAlarms() {
+      const now = new Date();
+      const nowMins = now.getHours() * 60 + now.getMinutes();
+      const todayKey = now.toDateString();
+
+      schedule.forEach(item => {
+        if (!item.enabled) return;
+        const [h, m] = item.time.split(':').map(Number);
+        const itemMins = h * 60 + m;
+        const triggerKey = `${todayKey}_${item.id}_${item.time}`;
+
+        if (nowMins >= itemMins && nowMins <= itemMins + 5 && !triggeredToday[triggerKey]) {
+          triggeredToday[triggerKey] = true;
+          try {
+            localStorage.setItem('triggeredToday_v3', JSON.stringify(triggeredToday));
+          } catch (e) {}
+
+          const title = currentLang === 'en' && item.title_en ? item.title_en : item.title;
+          const desc = currentLang === 'en' && item.desc_en ? item.desc_en : item.desc;
+          triggerNotification(title, desc);
+        }
+      });
+
+      updateNextReminder();
+    }
+
+    function playBeep() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioCtx();
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.15);
+          gain.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.15);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.15 + 0.4);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.15);
+          osc.stop(ctx.currentTime + i * 0.15 + 0.4);
+        });
+      } catch (e) {}
+    }
+
+    function format12Hour(time24) {
+      let [h, m] = time24.split(':').map(Number);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')} ${ampm}`;
+    }
+
+    function renderSchedule() {
+      schedule.sort((a, b) => a.time.localeCompare(b.time));
+      try {
+        localStorage.setItem('gymSchedule_v3', JSON.stringify(schedule));
+      } catch (e) {}
+      const container = document.getElementById('scheduleList');
+      container.innerHTML = '';
+
+      schedule.forEach(item => {
+        const displayTitle = currentLang === 'en' && item.title_en ? item.title_en : item.title;
+        const displayDesc = currentLang === 'en' && item.desc_en ? item.desc_en : item.desc;
+        const card = document.createElement('div');
+        card.className = `editorial-card rounded-2xl p-3.5 transition ${item.enabled ? 'opacity-100' : 'opacity-45'}`;
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex-1 cursor-pointer" onclick="openEditModal(${item.id})">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-bold font-num text-[#e5b567] bg-[#e5b567]/12 px-2.5 py-0.5 rounded-lg border border-[#e5b567]/25">
+                  ${format12Hour(item.time)}
+                </span>
+                <h4 class="text-sm font-bold text-[#f4f1ea]">${displayTitle}</h4>
+              </div>
+              <p class="text-xs text-[#9ca39e] mt-1.5 leading-relaxed">${displayDesc}</p>
+            </div>
+            <div class="flex flex-col items-end gap-2 shrink-0">
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" ${item.enabled ? 'checked' : ''} onchange="toggleItem(${item.id})" class="sr-only peer">
+                <div class="w-10 h-5 bg-[#0c0f0e] border border-[#f4f1ea]/15 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-[#0c0f0e] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#f4f1ea] after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#e5b567]"></div>
+              </label>
+              <button onclick="openEditModal(${item.id})" class="text-[11px] text-[#9ca39e] hover:text-[#e5b567] font-medium">${i18nStrings[currentLang].editText}</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      updateNextReminder();
+    }
+
+    function toggleItem(id) {
+      const idx = schedule.findIndex(x => x.id === id);
+      if (idx > -1) {
+        schedule[idx].enabled = !schedule[idx].enabled;
+        renderSchedule();
+        showToast(schedule[idx].enabled 
+          ? (currentLang === 'en' ? "Alarm enabled" : "অ্যালার্ম চালু হয়েছে") 
+          : (currentLang === 'en' ? "Alarm disabled" : "অ্যালার্ম বন্ধ করা হয়েছে"));
+      }
+    }
+
+    function updateNextReminder() {
+      const now = new Date();
+      const nowMins = now.getHours() * 60 + now.getMinutes();
+      const activeItems = schedule.filter(i => i.enabled).sort((a, b) => a.time.localeCompare(b.time));
+
+      if (activeItems.length === 0) {
+        document.getElementById('nextTitle').textContent = currentLang === 'en' ? "No Active Alarms" : "কোনো অ্যালার্ম চালু নেই";
+        document.getElementById('nextDesc').textContent = currentLang === 'en' ? "Enable alarms from the list below" : "নিচের তালিকা থেকে অ্যালার্ম চালু করুন";
+        document.getElementById('nextTime').textContent = "--:--";
+        document.getElementById('nextCountdown').textContent = "";
+        return;
+      }
+
+      let next = activeItems.find(item => {
+        const [h, m] = item.time.split(':').map(Number);
+        return (h * 60 + m) > nowMins;
+      });
+
+      let isTomorrow = false;
+      if (!next) {
+        next = activeItems[0];
+        isTomorrow = true;
+      }
+
+      const [nh, nm] = next.time.split(':').map(Number);
+      let diffMins = (nh * 60 + nm) - nowMins;
+      if (isTomorrow) diffMins += 24 * 60;
+
+      const hrs = Math.floor(diffMins / 60);
+      const mins = diffMins % 60;
+
+      document.getElementById('nextTitle').textContent = currentLang === 'en' && next.title_en ? next.title_en : next.title;
+      document.getElementById('nextDesc').textContent = currentLang === 'en' && next.desc_en ? next.desc_en : next.desc;
+      document.getElementById('nextTime').textContent = format12Hour(next.time);
+      if (currentLang === 'en') {
+        document.getElementById('nextCountdown').textContent = hrs > 0 ? `in ${hrs}h ${mins}m` : `in ${mins}m`;
+      } else {
+        document.getElementById('nextCountdown').textContent = hrs > 0 ? `${hrs} ঘণ্টা ${mins} মিনিট বাকি` : `${mins} মিনিট বাকি`;
+      }
+    }
+
+    function dismissPopup() {
+      document.getElementById('alarmPopup').classList.add('hidden');
+    }
+
+    function testAlarm() {
+      triggerNotification(
+        currentLang === 'en' ? "AuraFit Studio Alarm Active!" : "AuraFit Studio অ্যালার্ম সক্রিয়!",
+        currentLang === 'en' ? "You will receive real-time sounds and popups at scheduled times." : "নির্ধারিত সময়ে ঠিক এভাবেই সাউন্ড ও নোটিফিকেশন পাবেন।"
+      );
+    }
+
+    function requestNotifPermission() {
+      if (!("Notification" in window)) {
+        testAlarm();
+        return;
+      }
+      Notification.requestPermission().then(() => {
+        updateNotifStatus();
+        testAlarm();
+      });
+    }
+
+    function updateNotifStatus() {
+      const btnText = document.getElementById('notifBtnText');
+      if ("Notification" in window && Notification.permission === "granted") {
+        btnText.textContent = i18nStrings[currentLang].alarmOnActive;
+      } else {
+        btnText.textContent = i18nStrings[currentLang].alarmOnBtn;
+      }
+    }
+
+    function switchTab(tab) {
+      ['schedule', 'weight', 'ai', 'water'].forEach(t => {
+        document.getElementById(`tab-${t}`).classList.add('hidden');
+        document.getElementById(`nav-${t}`).classList.remove('pill-tab-active');
+      });
+      document.getElementById(`tab-${tab}`).classList.remove('hidden');
+      document.getElementById(`nav-${tab}`).classList.add('pill-tab-active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateWaterUI() {
+      document.getElementById('waterTotal').textContent = waterIntake;
+      const pct = Math.min(100, Math.round((waterIntake / 3500) * 100));
+      document.getElementById('waterBar').style.width = pct + '%';
+      try {
+        localStorage.setItem('waterIntake_v3', waterIntake);
+      } catch (e) {}
+    }
+
+    function addWater(ml) {
+      waterIntake += ml;
+      updateWaterUI();
+      showToast(currentLang === 'en' ? `+${ml} ml water added!` : `+${ml} ml পানি যোগ করা হয়েছে!`);
+    }
+
+    function resetWater() {
+      waterIntake = 0;
+      updateWaterUI();
+      showToast(currentLang === 'en' ? "Water tracker reset." : "পানির হিসাব রিসেট করা হয়েছে।");
+    }
+
+    function openEditModal(id) {
+      const item = schedule.find(x => x.id === id);
+      if (!item) return;
+      document.getElementById('modalTitle').textContent = currentLang === 'en' ? "Edit Reminder" : "রিমাইন্ডার এডিট করুন";
+      document.getElementById('editId').value = item.id;
+      document.getElementById('editTime').value = item.time;
+      document.getElementById('editTitleInput').value = currentLang === 'en' && item.title_en ? item.title_en : item.title;
+      document.getElementById('editDescInput').value = currentLang === 'en' && item.desc_en ? item.desc_en : item.desc;
+      document.getElementById('deleteReminderBtn').classList.remove('hidden');
+      document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function openAddModal() {
+      document.getElementById('modalTitle').textContent = currentLang === 'en' ? "Add New Reminder" : "নতুন রিমাইন্ডার যোগ করুন";
+      document.getElementById('editId').value = "";
+      document.getElementById('editTime').value = "16:00";
+      document.getElementById('editTitleInput').value = "";
+      document.getElementById('editDescInput').value = "";
+      document.getElementById('deleteReminderBtn').classList.add('hidden');
+      document.getElementById('editModal').classList.remove('hidden');
+    }
+
+    function deleteReminder() {
+      const id = document.getElementById('editId').value;
+      if (!id) return;
+      schedule = schedule.filter(x => x.id != id);
+      closeModal();
+      renderSchedule();
+      showToast(currentLang === 'en' ? "Reminder deleted." : "রিমাইন্ডারটি মুছে ফেলা হয়েছে।");
+    }
+
+    function closeModal() {
+      document.getElementById('editModal').classList.add('hidden');
+    }
+
+    function saveReminder() {
+      const id = document.getElementById('editId').value;
+      const time = document.getElementById('editTime').value;
+      const title = document.getElementById('editTitleInput').value.trim();
+      const desc = document.getElementById('editDescInput').value.trim();
+
+      if (!time || !title) {
+        showToast(currentLang === 'en' ? "Please provide both time and title." : "দয়া করে সময় এবং শিরোনাম দিন।");
+        return;
+      }
+
+      if (id) {
+        const idx = schedule.findIndex(x => x.id == id);
+        if (idx > -1) {
+          schedule[idx].time = time;
+          if (currentLang === 'en') {
+            schedule[idx].title_en = title;
+            schedule[idx].desc_en = desc;
+          } else {
+            schedule[idx].title = title;
+            schedule[idx].desc = desc;
+          }
+        }
+      } else {
+        const newItem = {
+          id: Date.now(),
+          time,
+          title: title,
+          desc: desc || (currentLang === 'en' ? "Complete scheduled activity." : "নির্ধারিত সময়ের কাজ সম্পন্ন করুন।"),
+          enabled: true
+        };
+        if (currentLang === 'en') {
+          newItem.title_en = title;
+          newItem.desc_en = desc;
+        }
+        schedule.push(newItem);
+      }
+      closeModal();
+      renderSchedule();
+      showToast(currentLang === 'en' ? "Reminder saved successfully!" : "রিমাইন্ডার সফলভাবে সেভ হয়েছে!");
+    }
+
+    const defaultSchedule = [
+      { id: 1, time: "08:00", title: "সকালের নাস্তা (Breakfast)", title_en: "Morning Breakfast", desc: "২টি সেদ্ধ ডিম (১টি কুসুমসহ) + ১টি সাগর কলা + ৫টি ভেজানো কাঠবাদাম।", desc_en: "2 boiled eggs (1 whole with yolk) + 1 banana + 5 soaked almonds.", enabled: true },
+      { id: 2, time: "11:00", title: "মিড-মর্নিং হাইড্রেশন ও চিয়া সিড", title_en: "Mid-Morning Chia & Hydration", desc: "১ গ্লাস পানিতে ভেজানো ১ চা চামচ চিয়া সিড + ১ গ্লাস সাধারণ পানি।", desc_en: "1 tsp soaked chia seeds in 1 glass water + 1 glass plain water.", enabled: true },
+      { id: 3, time: "13:30", title: "দুপুরের খাবার (Lunch)", title_en: "Balanced Lunch", desc: "১-১.৫ কাপ ভাত + মাছ/মুরগি + ডাল + পালং/লাল শাক (লেবু চিপে) + ১টি কাঁচা আমলকী।", desc_en: "1-1.5 cups rice + fish/chicken + lentils + spinach with lemon + 1 fresh Amla.", enabled: true },
+      { id: 4, time: "17:30", title: "প্রি-ওয়ার্কআউট ও গ্রিন টি", title_en: "Pre-Workout & Green Tea", desc: "১ কাপ চিনি ছাড়া গ্রিন টি বা ব্ল্যাক কফি + ১টি আপেল বা ১ মুঠো ভাজা ছোলা ও কুমড়োর বীজ।", desc_en: "1 cup unsweetened green tea/black coffee + 1 apple or roasted chickpeas & pumpkin seeds.", enabled: true },
+      { id: 5, time: "18:45", title: "জিমের লবণ-লেবুর পানি তৈরি", title_en: "Prepare Gym Electrolyte Water", desc: "১ লিটার বোতলে পানি + ১ চিমটি লবণ + অর্ধেক কাগজি লেবুর রস মিশিয়ে ব্যাগে নিন।", desc_en: "Mix 1L water + 1 pinch salt + half lemon juice in your gym bottle.", enabled: true },
+      { id: 6, time: "19:00", title: "জিম শুরু (Workout Time)", title_en: "Gym Workout Session", desc: "সন্ধ্যা ৭:০০ - রাত ৯:০০ পর্যন্ত ওয়ার্কআউট। মাঝে মাঝে চুমুক দিয়ে লবণ-লেবুর পানি খান।", desc_en: "7:00 PM - 9:00 PM workout. Sip your lemon-salt water regularly.", enabled: true },
+      { id: 7, time: "21:30", title: "পোস্ট-ওয়ার্কআউট ডিনার (রাতের খাবার)", title_en: "Post-Workout Lean Dinner", desc: "ভাত/রুটি ছাড়া: ১৫০-২০০ গ্রাম মুরগি বা মাছ (অথবা ৩টি ডিমের সাদা অংশ) + ১ বাটি সেদ্ধ/সতে সবজি।", desc_en: "No rice/roti: 150-200g chicken/fish (or 3 egg whites) + 1 bowl steamed/sauteed veggies.", enabled: true },
+      { id: 8, time: "22:15", title: "ঘুমের আগে ক্যাফেইন-মুক্ত পানীয়", title_en: "Caffeine-Free Bedtime Drink", desc: "১ কাপ ক্যামোমাইল টি বা কুসুম গরম পানিতে আদা/দারুচিনি (গ্রিন টি খাবেন না)।", desc_en: "1 cup chamomile tea or warm ginger-cinnamon water (no green tea at night).", enabled: true }
+    ];
+
+    let schedule = [];
+    let triggeredToday = {};
+    let waterIntake = 0;
+    let weightLogs = [];
+    let targetWeight = 68.0;
+
+    function loadAppState() {
+      try {
+        schedule = JSON.parse(localStorage.getItem('gymSchedule_v3')) || defaultSchedule;
+        triggeredToday = JSON.parse(localStorage.getItem('triggeredToday_v3')) || {};
+        waterIntake = parseInt(localStorage.getItem('waterIntake_v3')) || 0;
+        const savedDate = localStorage.getItem('savedDate_v3') || new Date().toDateString();
+
+        if (savedDate !== new Date().toDateString()) {
+          triggeredToday = {};
+          waterIntake = 0;
+          localStorage.setItem('savedDate_v3', new Date().toDateString());
+          localStorage.setItem('triggeredToday_v3', JSON.stringify(triggeredToday));
+          localStorage.setItem('waterIntake_v3', waterIntake);
+        }
+      } catch (e) {
+        schedule = defaultSchedule;
+      }
+    }
+
+    function loadWeightData() {
+      try {
+        weightLogs = JSON.parse(localStorage.getItem('aurafit_weight_logs')) || [
+          { date: 'Start', weight: 78.0 }
+        ];
+        targetWeight = parseFloat(localStorage.getItem('aurafit_target_weight')) || 68.0;
+      } catch (e) {
+        weightLogs = [{ date: 'Start', weight: 78.0 }];
+      }
+    }
+
+    function renderWeightUI() {
+      if (weightLogs.length === 0) return;
+      const startW = weightLogs[0].weight;
+      const currentW = weightLogs[weightLogs.length - 1].weight;
+      const lost = Math.max(0, startW - currentW).toFixed(1);
+
+      document.getElementById('startWeightDisplay').textContent = `${startW} kg`;
+      document.getElementById('currentWeightDisplay').textContent = `${currentW} kg`;
+      document.getElementById('targetWeightDisplay').textContent = `${targetWeight} kg`;
+      document.getElementById('weightLostBadge').textContent = currentLang === 'en' ? `${lost} kg` : `${lost} কেজি`;
+      document.getElementById('inputTargetWeight').value = targetWeight;
+
+      const totalToLose = Math.max(0.1, startW - targetWeight);
+      const pct = Math.min(100, Math.max(0, Math.round(((startW - currentW) / totalToLose) * 100)));
+      document.getElementById('weightGoalPct').textContent = `${pct}%`;
+      document.getElementById('weightProgressBar').style.width = `${pct}%`;
+
+      const listEl = document.getElementById('weightHistoryList');
+      listEl.innerHTML = [...weightLogs].reverse().map((entry, idx) => {
+        const realIdx = weightLogs.length - 1 - idx;
+        const displayDate = entry.date === 'Start' && currentLang === 'bn' ? 'শুরু' : entry.date;
+        return `
+          <div class="flex justify-between items-center bg-[#0c0f0e]/70 px-3 py-2 rounded-xl border border-[#f4f1ea]/5 text-xs">
+            <span class="text-[#9ca39e]">${displayDate}</span>
+            <div class="flex items-center gap-3">
+              <span class="font-bold font-num text-[#f4f1ea]">${entry.weight} kg</span>
+              ${realIdx !== 0 ? `<button onclick="deleteWeightEntry(${realIdx})" class="text-rose-400 hover:text-rose-300 text-[10px]">✕</button>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const svg = document.getElementById('weightChartSvg');
+      const recent = weightLogs.slice(-7);
+      if (recent.length === 1) {
+        svg.innerHTML = `<circle cx="150" cy="45" r="5" fill="#e5b567" /><text x="150" y="30" fill="#f4f1ea" font-size="11" text-anchor="middle">${recent[0].weight} kg</text>`;
+      } else {
+        const weights = recent.map(r => r.weight);
+        const minW = Math.min(...weights) - 1;
+        const maxW = Math.max(...weights) + 1;
+        const points = recent.map((r, i) => {
+          const x = 20 + (i * (260 / (recent.length - 1)));
+          const y = 75 - (((r.weight - minW) / (maxW - minW)) * 55);
+          return `${x},${y}`;
+        }).join(' ');
+        const circles = recent.map((r, i) => {
+          const x = 20 + (i * (260 / (recent.length - 1)));
+          const y = 75 - (((r.weight - minW) / (maxW - minW)) * 55);
+          return `<circle cx="${x}" cy="${y}" r="4" fill="#e5b567" /><text x="${x}" y="${y - 8}" fill="#f4f1ea" font-size="9" text-anchor="middle">${r.weight}</text>`;
+        }).join('');
+        svg.innerHTML = `<polyline fill="none" stroke="#4ade80" stroke-width="2.5" points="${points}" />${circles}`;
+      }
+    }
+
+    function deleteWeightEntry(idx) {
+      if (idx === 0) return;
+      weightLogs.splice(idx, 1);
+      try { localStorage.setItem('aurafit_weight_logs', JSON.stringify(weightLogs)); } catch (e) {}
+      renderWeightUI();
+      showToast(currentLang === 'en' ? "Log entry deleted." : "এন্ট্রি মুছে ফেলা হয়েছে।");
+    }
+
+    function logWeightEntry() {
+      const w = parseFloat(document.getElementById('inputNewWeight').value);
+      const t = parseFloat(document.getElementById('inputTargetWeight').value);
+      if (t && t > 20) {
+        targetWeight = t;
+        try { localStorage.setItem('aurafit_target_weight', targetWeight); } catch (e) {}
+      }
+      if (!w || w < 20) {
+        showToast(currentLang === 'en' ? "Please enter a valid weight in kg." : "দয়া করে সঠিক ওজন (কেজি) লিখুন।");
+        return;
+      }
+      const todayLabel = new Date().toLocaleDateString(currentLang === 'en' ? 'en-US' : 'bn-BD', { day: 'numeric', month: 'short' });
+      const existingIdx = weightLogs.findIndex(entry => entry.date === todayLabel);
+      if (existingIdx > -1) {
+        weightLogs[existingIdx].weight = w;
+      } else {
+        weightLogs.push({ date: todayLabel, weight: w });
+      }
+      try { localStorage.setItem('aurafit_weight_logs', JSON.stringify(weightLogs)); } catch (e) {}
+      document.getElementById('inputNewWeight').value = '';
+      renderWeightUI();
+      showToast(currentLang === 'en' ? "Today's weight logged successfully!" : "আজকের ওজন সেভ হয়েছে!");
+    }
+
+    function clearWeightHistory() {
+      weightLogs = [{ date: 'Start', weight: 78.0 }];
+      localStorage.setItem('aurafit_weight_logs', JSON.stringify(weightLogs));
+      renderWeightUI();
+      showToast(currentLang === 'en' ? "Weight history reset." : "ওজনের ইতিহাস রিসেট করা হয়েছে।");
+    }
+
+    function renderAllTips() {
+      const container = document.getElementById('allTipsList');
+      container.innerHTML = healthTipsDB.map(t => `
+        <div class="editorial-card rounded-2xl p-3.5">
+          <span class="text-[10px] font-bold text-[#e5b567] uppercase tracking-wider">${currentLang === 'en' ? t.cat_en : t.cat_bn}</span>
+          <p class="text-xs text-[#f4f1ea]/90 mt-1 leading-relaxed">${currentLang === 'en' ? t.text_en : t.text_bn}</p>
+        </div>
+      `).join('');
+    }
+
+    function calculateAIMetrics() {
+      const w = parseFloat(document.getElementById('aiWeightKg').value);
+      const age = parseFloat(document.getElementById('aiAge').value);
+      const ft = parseInt(document.getElementById('aiHeightFeet').value);
+      const inch = parseInt(document.getElementById('aiHeightInches').value);
+      const resBox = document.getElementById('aiCalcResult');
+
+      if (!w || !age) {
+        showToast(currentLang === 'en' ? "Please enter both weight and age." : "দয়া করে ওজন এবং বয়স লিখুন।");
+        return;
+      }
+
+      const totalInches = (ft * 12) + inch;
+      const heightCm = totalInches * 2.54;
+      const heightM = heightCm / 100;
+      const bmi = (w / (heightM * heightM)).toFixed(1);
+      const bmr = (10 * w) + (6.25 * heightCm) - (5 * age) + 5;
+      const targetCal = Math.max(1350, Math.round((bmr * 1.45) - 450));
+      const targetProtein = Math.round(w * 1.5);
+      const targetWater = (w * 0.045).toFixed(1);
+
+      resBox.classList.remove('hidden');
+      if (currentLang === 'en') {
+        resBox.innerHTML = `
+          <div class="flex justify-between border-b border-[#f4f1ea]/10 pb-2">
+            <span class="text-[#9ca39e]">Height: ${ft}'${inch}" (${totalInches} in)</span>
+            <span class="font-bold text-[#e5b567]">BMI: ${bmi}</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 pt-1 text-center font-num">
+            <div class="bg-[#1c2220] p-2 rounded-xl">
+              <div class="text-[10px] text-[#9ca39e]">Calories</div>
+              <div class="text-sm font-bold text-white">${targetCal} kcal</div>
+            </div>
+            <div class="bg-[#1c2220] p-2 rounded-xl">
+              <div class="text-[10px] text-[#9ca39e]">Protein</div>
+              <div class="text-sm font-bold text-emerald-400">${targetProtein}g</div>
+            </div>
+            <div class="bg-[#1c2220] p-2 rounded-xl">
+              <div class="text-[10px] text-[#9ca39e]">Water</div>
+              <div class="text-sm font-bold text-sky-400">${targetWater}L</div>
+            </div>
+          </div>
+        `;
+      } else {
+        resBox.innerHTML = `
+          <div class="flex justify-between border-b border-[#f4f1ea]/10 pb-2">
+            <span class="text-[#9ca39e]">উচ্চতা: ${ft}'${inch}" (${totalInches} ইঞ্চি)</span>
+            <span class="font-bold text-[#e5b567]">BMI: ${bmi}</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 pt-1 text-center font-num">
+            <div class="bg-[#1c2220] p-2 rounded-xl">
+              <div class="text-[10px] text-[#9ca39e]">ক্যালরি</div>
+              <div class="text-sm font-bold text-white">${targetCal}</div>
+            </div>
+            <div class="bg-[#1c2220] p-2 rounded-xl">
+              <div class="text-[10px] text-[#9ca39e]">প্রোটিন</div>
+              <div class="text-sm font-bold text-emerald-400">${targetProtein}g</div>
+            </div>
+            <div class="bg-[#1c2220] p-2 rounded-xl">
+              <div class="text-[10px] text-[#9ca39e]">পানি</div>
+              <div class="text-sm font-bold text-sky-400">${targetWater}L</div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function generateAIDinner() {
+      const prot = document.getElementById('dinnerProteinPref').value;
+      const mood = document.getElementById('dinnerMoodPref').value;
+      const out = document.getElementById('aiDinnerOutput');
+
+      const meals_bn = {
+        chicken_light: "🍗 <strong>লেমন হার্ব গ্রিলড চিকেন:</strong> ১৫০ গ্রাম মুরগির বুকের মাংস গোলমরিচ ও লেবুর রস দিয়ে অল্প তেলে গ্রিল করে ১ বাটি সেদ্ধ পেঁপে ও গাজরের সাথে খান (~৩২০ kcal, ৩৫g প্রোটিন)।",
+        chicken_spicy: "🌶️ <strong>স্পাইসি চিকেন ভুনা ও সালাদ:</strong> ১৫০ গ্রাম চিকেন কাঁচামরিচ, আদা-রসুন ও ১ চামচ সরিষার তেলে ভুনা করে শসা-টমেটো সালাদ দিয়ে খান (~৩৫০ kcal, ৩৫g প্রোটিন)।",
+        chicken_soup: "🍲 <strong>ক্লিয়ার চিকেন ভেজিটেবল স্যুপ:</strong> ১০০ গ্রাম কুচানো চিকেন, বাঁধাকপি, গাজর ও গোলমরিচ দিয়ে গরম স্যুপ তৈরি করে খান (~২৮০ kcal, ২৮g প্রোটিন)।",
+        fish_light: "🐟 <strong>ভাপা বা হালকা ভাজা মাছ ও সবজি:</strong> ১ বড় পিস রুই/কাতলা মাছ সামান্য হলুদ-লবণে ভেজে ১ বাটি পালং শাক ও লাউ সেদ্ধ দিয়ে খান (~৩১০ kcal, ৩০g প্রোটিন)।",
+        fish_spicy: "🌶️ <strong>মাছের ঝাল ভুনা ও শসা সালাদ:</strong> ১ পিস তেলাপিয়া বা রুই মাছ পেঁয়াজ-মরিচ দিয়ে হালকা ঝাল করে রান্না করে কাঁচা সালাদসহ খান (~৩৩০ kcal, ৩০g প্রোটিন)।",
+        fish_soup: "🍲 <strong>ফিশ ও ভেজিটেবল স্টু:</strong> কাঁটা ছাড়া মাছের টুকরো, পেঁপে ও আদা দিয়ে পাতলা ঝোল করে খান—রাতে খুব দ্রুত হজম হয় (~২৭০ kcal, ২৮g প্রোটিন)।",
+        egg_light: "🥚 <strong>এগ হোয়াইট অমলেট ও সবজি:</strong> ৪টি ডিমের সাদা অংশ (১টি কুসুমসহ) ধনেপাতা দিয়ে অমলেট করে ১ বাটি সবজি সেদ্ধ দিয়ে খান (~২৬০ kcal, ২৪g প্রোটিন)।",
+        egg_spicy: "🌶️ <strong>মসলা এগ ভুর্জি:</strong> ৪টি ডিমের সাদা অংশ কাঁচামরিচ, টমেটো ও পেঁয়াজ দিয়ে ভুর্জি করে শসার সালাদ দিয়ে খান (~২৮০ kcal, ২৪g প্রোটিন)।",
+        egg_soup: "🍲 <strong>এগ ড্রপ ভেজিটেবল স্যুপ:</strong> গরম সবজির স্যুপের মধ্যে ৩টি ডিমের সাদা অংশ ফেটিয়ে দিয়ে তৈরি করুন—দারুণ তৃপ্তিদায়ক (~২৫০ kcal, ২২g প্রোটিন)।"
+      };
+
+      const meals_en = {
+        chicken_light: "🍗 <strong>Lemon Herb Grilled Chicken:</strong> 150g grilled chicken breast seasoned with lemon and black pepper, served with steamed carrots and papaya (~320 kcal, 35g protein).",
+        chicken_spicy: "🌶️ <strong>Spicy Chicken Bhuna & Salad:</strong> 150g chicken cooked in 1 tsp mustard oil with garlic, ginger, and chili, served with fresh cucumber salad (~350 kcal, 35g protein).",
+        chicken_soup: "🍲 <strong>Clear Chicken Vegetable Soup:</strong> Shredded chicken (100g) with cabbage, carrot, and black pepper simmered in broth (~280 kcal, 28g protein).",
+        fish_light: "🐟 <strong>Steamed/Pan-Seared Fish:</strong> 1 piece of carp or tilapia lightly seasoned, paired with steamed bottle gourd and spinach (~310 kcal, 30g protein).",
+        fish_spicy: "🌶️ <strong>Spicy Fish Curry & Cucumber:</strong> 1 fish fillet cooked in a light onion-chili gravy with sliced raw cucumbers (~330 kcal, 30g protein).",
+        fish_soup: "🍲 <strong>Fish & Green Veggie Stew:</strong> Boneless fish cubes simmered with green papaya and ginger (~270 kcal, 28g protein).",
+        egg_light: "🥚 <strong>Egg White Omelet:</strong> 4 egg whites (1 whole egg with yolk) whisked with cilantro, served with steamed veggies (~260 kcal, 24g protein).",
+        egg_spicy: "🌶️ <strong>Desi Egg Bhurji:</strong> Scrambled egg whites sautéed with tomatoes, green chili, and onion (~280 kcal, 24g protein).",
+        egg_soup: "🍲 <strong>Egg Drop Vegetable Soup:</strong> Whisk 3 egg whites into a warm vegetable broth for quick night digestion (~250 kcal, 22g protein)."
+      };
+
+      out.classList.remove('hidden');
+      out.innerHTML = currentLang === 'en' ? meals_en[`${prot}_${mood}`] : meals_bn[`${prot}_${mood}`];
+    }
+
+    function generateAIWorkout(type) {
+      const out = document.getElementById('aiWorkoutOutput');
+      const plans_bn = {
+        belly: "🔥 <strong>সন্ধ্যা ৭:০০ - ৯:০০ (Core & HIIT):</strong> ১০ মিনিট ওয়ার্মআপ → ৪০ মিনিট ফুল-বডি ওয়েট ট্রেনিং → ২৫ মিনিট প্ল্যাঙ্ক, লেগ রেইজ ও মাউন্টেন ক্লাইম্বার → ২০ মিনিট ইনক্লাইন ট্রেডমিল ওয়াক। প্রতি ১৫ মিনিটে লবণ-লেবুর পানি পান করুন।",
+        upper: "💪 <strong>সন্ধ্যা ৭:০০ - ৯:০০ (Upper Body):</strong> পুশ-আপ, চেস্ট প্রেস, ল্যাট পুলডাউন, শোল্ডার প্রেস ও বাইসেপ কার্ল (প্রতিটি ৩ সেট × ১২-১৫ রেপস) + শেষে ২০ মিনিট সাইক্লিং।",
+        legs: "🦵 <strong>সন্ধ্যা ৭:০০ - ৯:০০ (Legs & Fat Burn):</strong> স্কোয়াট, লাঞ্জেস, লেগ প্রেস, কাফ রেইজ (৩ সেট × ১৫ রেপস) + শেষে ১৫ মিনিট ব্রিস্ক ওয়াকিং। পায়ের পেশি বড় হওয়ায় এতে সবচেয়ে বেশি ক্যালরি বার্ন হয়।"
+      };
+      const plans_en = {
+        belly: "🔥 <strong>7:00 PM - 9:00 PM (Core & HIIT):</strong> 10m warmup → 40m full-body weight training → 25m planks, leg raises & mountain climbers → 20m incline treadmill walk. Sip lemon-salt water every 15 mins.",
+        upper: "💪 <strong>7:00 PM - 9:00 PM (Upper Body):</strong> Push-ups, chest press, lat pulldown, shoulder press & bicep curls (3 sets × 12-15 reps) + 20m cycling finisher.",
+        legs: "🦵 <strong>7:00 PM - 9:00 PM (Legs & Fat Burn):</strong> Squats, lunges, leg press, calf raises (3 sets × 15 reps) + 15m brisk walk. Leg days burn maximum stored body fat."
+      };
+      out.innerHTML = currentLang === 'en' ? plans_en[type] : plans_bn[type];
+    }
+
+    function generateFoodSwap() {
+      const val = document.getElementById('foodSwapSelect').value;
+      const box = document.getElementById('foodSwapResult');
+      const swaps_bn = {
+        chicken: "✅ <strong>বিকল্প:</strong> ১৫০ গ্রাম রুই/কাতলা/তেলাপিয়া মাছ অথবা ৩-৪টি সেদ্ধ ডিমের সাদা অংশ (১টি কুসুমসহ) খান। সমপরিমাণ প্রোটিন পাবেন।",
+        broccoli: "✅ <strong>বিকল্প:</strong> দেশি সবজি যেমন—পেঁপে, লাউ, পটল, ঝিঙা, বাঁধাকপি বা পালং শাক হালকা সেদ্ধ বা অল্প তেলে ভাজি করে খান।",
+        oats: "✅ <strong>বিকল্প:</strong> ২ পিস ব্রাউন ব্রেড (আটার রুটি) অথবা ১ বাটি সেদ্ধ ছোলা ও শসা খেতে পারেন।",
+        greentea: "✅ <strong>বিকল্প:</strong> চিনি ও দুধ ছাড়া ১ কাপ রং চা (আদা ও লেবু দিয়ে) অথবা ১ চামচ কফি গরম পানিতে মিশিয়ে খান।",
+        chia: "✅ <strong>বিকল্প:</strong> এক মুঠো ভাজা চিনাবাদাম অথবা তিলের নাড়ু (চিনি ছাড়া) / সূর্যমুখীর বীজ খেতে পারেন।"
+      };
+      const swaps_en = {
+        chicken: "✅ <strong>Substitute:</strong> 150g carp or tilapia fish, OR 3-4 boiled egg whites (with 1 whole yolk). Provides equal bioavailable protein.",
+        broccoli: "✅ <strong>Substitute:</strong> Local green veggies like raw papaya, bottle gourd, pointed gourd (potol), cabbage, or spinach.",
+        oats: "✅ <strong>Substitute:</strong> 2 whole wheat rotis, or 1 bowl of boiled chickpeas with sliced cucumber.",
+        greentea: "✅ <strong>Substitute:</strong> 1 cup unsweetened black tea with ginger & lemon, or 1 tsp black coffee in hot water.",
+        chia: "✅ <strong>Substitute:</strong> A handful of roasted peanuts or sunflower seeds."
+      };
+
+      if (!val) {
+        box.classList.add('hidden');
+        return;
+      }
+      box.classList.remove('hidden');
+      box.innerHTML = currentLang === 'en' ? swaps_en[val] : swaps_bn[val];
+    }
+
+    window.onload = function() {
+      loadAppState();
+      loadWeightData();
+      updateApiBadgeUI();
+      if (weightLogs.length > 0) {
+        document.getElementById('aiWeightKg').value = weightLogs[weightLogs.length - 1].weight;
+      }
+      applyLanguage();
+      if (getSavedApiKey()) {
+        fetchLiveGeminiTip(false);
+      }
+      updateWaterUI();
+      checkAlarms();
+      setInterval(checkAlarms, 1000);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) checkAlarms();
+      });
+    };
+  </script>
+</body>
+</html>
