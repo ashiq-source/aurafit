@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "AuraFit AI",
+    "slug": "aurafit-ai",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "scheme": "aurafit",
+    "android": {
+      "package": "com.ashiqsource.aurafit",
+      "versionCode": 1,
+      "permissions": ["android.permission.POST_NOTIFICATIONS", "android.permission.RECEIVE_BOOT_COMPLETED", "android.permission.SCHEDULE_EXACT_ALARM"],
+      "adaptiveIcon": {
+        "backgroundColor": "#101713",
+        "foregroundImage": "./assets/adaptive-icon.png"
+      }
+    },
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#101713"
+    },
+    "plugins": [
+      ["expo-notifications", {"icon": "./assets/notification-icon.png", "color": "#d8ae68", "defaultChannel": "aurafit-reminders"}],
+      ["expo-secure-store", {"configureAndroidBackup": true, "faceIDPermission": "Allow AuraFit to access secure storage."}]
+    ],
+    "extra": {
+      "eas": {"projectId": "REPLACE_WITH_EAS_PROJECT_ID"}
+    }
+  }
+}
